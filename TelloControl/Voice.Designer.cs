@@ -31,14 +31,21 @@
             console = new RichTextBox();
             siLK = new Button();
             enUS = new Button();
+            btnTelemetry = new Button();
+            btnConnect = new Button();
             SuspendLayout();
             // 
             // console
             // 
+            console.BackColor = Color.Black;
+            console.DetectUrls = false;
+            console.ForeColor = Color.Lime;
             console.Location = new Point(134, 2);
             console.Name = "console";
-            console.Size = new Size(666, 447);
+            console.ReadOnly = true;
+            console.Size = new Size(666, 462);
             console.TabIndex = 0;
+            console.TabStop = false;
             console.Text = "";
             // 
             // siLK
@@ -61,11 +68,33 @@
             enUS.UseVisualStyleBackColor = true;
             enUS.Click += enUS_Click;
             // 
+            // btnTelemetry
+            // 
+            btnTelemetry.Location = new Point(26, 90);
+            btnTelemetry.Name = "btnTelemetry";
+            btnTelemetry.Size = new Size(75, 23);
+            btnTelemetry.TabIndex = 4;
+            btnTelemetry.Text = "Log Toggle";
+            btnTelemetry.UseVisualStyleBackColor = true;
+            btnTelemetry.Click += btnTelemetry_Click;
+            // 
+            // btnConnect
+            // 
+            btnConnect.Location = new Point(26, 131);
+            btnConnect.Name = "btnConnect";
+            btnConnect.Size = new Size(75, 23);
+            btnConnect.TabIndex = 5;
+            btnConnect.Text = "Connect";
+            btnConnect.UseVisualStyleBackColor = true;
+            btnConnect.Click += btnConnect_Click;
+            // 
             // Voice
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(826, 623);
+            Controls.Add(btnConnect);
+            Controls.Add(btnTelemetry);
             Controls.Add(enUS);
             Controls.Add(siLK);
             Controls.Add(console);
@@ -79,5 +108,7 @@
         private RichTextBox console;
         private Button siLK;
         private Button enUS;
+        private Button btnTelemetry;
+        private Button btnConnect;
     }
 }

@@ -30,6 +30,7 @@ namespace TelloControl
             // Set the environment variable to authenticate
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", credentialPath);
             speechClient = SpeechClient.Create();
+            Task.Run(TelloHelper.RecordFlightLogAsync);
         }
 
         private async void siLK_Click(object sender, EventArgs e)
@@ -96,12 +97,26 @@ namespace TelloControl
                         {
                             Invoke(new Action(() =>
                             {
-                                console.AppendText($"Transcript: {alternative.Transcript}, Confidence: {alternative.Confidence}\n");
+                                console.AppendText($"Transcript: {alternative.Transcript}, Confidence: {alternative.Confidence}" + Environment.NewLine);
+                                console.ScrollToCaret();
                             }));
                         }
                     }
                 }
             });
+        }
+
+        private void btnTelemetry_Click(object sender, EventArgs e)
+        {
+            TelloHelper.LoggingOn = !TelloHelper.LoggingOn;
+            console.AppendText((TelloHelper.LoggingOn ? "Logging Started" : "Logging Finished") + Environment.NewLine);
+            console.ScrollToCaret();
+        }
+
+        private void btnConnect_Click(object sender, EventArgs e)
+        {
+            console.AppendText("Connecting..."+Environment.NewLine);
+            var c = TelloHelper.Connect();
         }
     }
 }
