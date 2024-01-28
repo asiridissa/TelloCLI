@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Speech2TextGoogle/msc2024-411517-71868ce380c1.json
+/TelloControl/msc2024-411517-71868ce380c1.json
