@@ -1,5 +1,6 @@
 ﻿using System.Net;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 
 namespace TelloCLI
@@ -7,104 +8,116 @@ namespace TelloCLI
 
     internal class Program
     {
-        public static UdpClient UdpClient = new UdpClient();
+        private static IPEndPoint _ipEndPoint;
+        private const string TelloIp = "192.168.10.1"; // Tello's default IP address
+        private const int TelloPort = 8889; // Tello's command port
+        private const int ListenPort = 8890; // Tello's response port'
+        public static string SessionId = DateTime.Now.ToString("MMdd_HHmmss");
+        string _csvFilePath = SessionId + "_TelloFlightLog.csv"; // Log file path
+        private static string _logFilepath = "";
+        static UdpClient udpClient = new UdpClient(TelloIp, TelloPort);
 
-        static async Task Main(string[] args)
+        static void Main()
         {
-            Console.WriteLine("Hello, World!");
+            _logFilepath = Path.Combine(Path.GetDirectoryName(Assembly.GetAssembly(typeof(Program)).CodeBase.Replace("file:///", "")), "Logs", SessionId + ".txt");
+            Directory.CreateDirectory(Path.GetDirectoryName(_logFilepath) ?? string.Empty);
+            Log($"Session {SessionId} started");
+
             try
             {
-                UdpClient.Connect("192.168.10.1", 8889);
-                await Loop("command");
+                Task.Run(ListenAsync);
+
+                udpClient.Connect(TelloIp, TelloPort);
+                SendCommand(udpClient, "command");
+
+                Log("Enter Tello command (e.g., takeoff, land, up 50):");
 
                 while (true)
                 {
-                    var command = Console.ReadLine();
-                    switch (true)
+                    string command = Console.ReadLine();
+                    if (command.ToLower() == "exit")
                     {
-                        case true when command == "end":
-                            await Loop("land");
-                            return;
-                        case true when !string.IsNullOrWhiteSpace(command):
-                            await Loop(command);
-                            break;
-                        default:
-                            break;
+                        break;
                     }
+
+                    SendCommand(udpClient, command);
                 }
+
+                udpClient.Close();
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                UdpClient.Close();
+                Log(e.Message);
+                Log(e.ToString());
+                throw;
             }
-            finally
+        }
+
+        static void SendCommand(UdpClient udpClient, string command)
+        {
+            byte[] data = Encoding.ASCII.GetBytes(command);
+            udpClient.Send(data, data.Length);
+
+            _ipEndPoint = new System.Net.IPEndPoint(System.Net.IPAddress.Any, 0);
+            byte[] receivedData = udpClient.Receive(ref _ipEndPoint);
+            string response = Encoding.ASCII.GetString(receivedData);
+
+            Log("Response: " + response);
+        }
+
+        static async Task ListenAsync()
+        {
+            UdpClient listenClient = new UdpClient("", ListenPort);
+            while (true)
             {
-                UdpClient.Close();
+                var receivedData = await listenClient.ReceiveAsync();
+                string response = Encoding.ASCII.GetString(receivedData.Buffer);
+                Log("Received response: " + response);
             }
         }
 
-        static async Task Loop(string command)
+        static async Task Listen()
         {
-            // Sends a message to the host to which you have connected.
-            Byte[] sendBytes = Encoding.ASCII.GetBytes(command);
-            UdpClient.Send(sendBytes, sendBytes.Length);
-            await Listen(9000);
+            UdpClient listenClient = new UdpClient("", ListenPort);
+            while (true)
+            {
+                _ipEndPoint = new System.Net.IPEndPoint(System.Net.IPAddress.Any, 0);
+                byte[] receivedData = udpClient.Receive(ref _ipEndPoint);
+                string response = Encoding.ASCII.GetString(receivedData);
+                Log("Received response: " + response);
+            }
         }
 
-        static Task Listen(int port)
+        #region Logs
+
+        public static async Task Log(string text, params string[] @params)
         {
-            var udpListner = new UdpClient(port);
-
-            //IPEndPoint object will allow us to read datagrams sent from any source.
-            IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Any, port);
-
-            // Blocks until a message returns on this socket from a remote host.
-            Byte[] receiveBytes = udpListner.Receive(ref remoteIpEndPoint);
-            string returnData = Encoding.ASCII.GetString(receiveBytes);
-
-            // Uses the IPEndPoint object to determine which of these two hosts responded.
-            Console.WriteLine($"Response {remoteIpEndPoint.Address}:{remoteIpEndPoint.Port} :- {returnData}");
-            udpListner.Close();
-            return Task.CompletedTask;
+            var sb = new StringBuilder();
+            var prefix = $"{DateTime.Now:yy/MM/dd HH:mm:ss.fff} | ";
+            sb.Append(prefix);
+            sb.Append(text);
+            foreach (var s in @params)
+            {
+                sb.AppendLine(s);
+            }
+            //Console.ForegroundColor = text.Trim().Contains("Add") ? ConsoleColor.DarkGray : ConsoleColor.White;
+            var msg = sb.ToString();
+            //Console.WriteLine(msg, Console.ForegroundColor);
+            Console.WriteLine(msg);
+            await FileWriteAsync(msg);
         }
 
-        //static Task Status()
-        //{
-        //    //IPEndPoint object will allow us to read datagrams sent from any source.
-        //    IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 8890);
+        public static async Task FileWriteAsync(string messaage, bool append = true)
+        {
+            using (FileStream stream = new FileStream(_logFilepath, append ? FileMode.Append : FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
+            {
+                using (StreamWriter sw = new StreamWriter(stream))
+                {
+                    await sw.WriteLineAsync(messaage);
+                }
+            }
+        }
 
-        //    // Blocks until a message returns on this socket from a remote host.
-        //    Byte[] receiveBytes = UdpClient.Receive(ref RemoteIpEndPoint);
-        //    string returnData = Encoding.ASCII.GetString(receiveBytes);
-
-        //    // Uses the IPEndPoint object to determine which of these two hosts responded.
-        //    Console.WriteLine($"Status {RemoteIpEndPoint.Address}:{RemoteIpEndPoint.Port} :- {returnData}");
-        //    return Task.CompletedTask;
-        //}
-
-        //private static async Task StatusListener(int listenPort)
-        //{
-        //    IPEndPoint groupEP = new IPEndPoint(IPAddress.Any, listenPort);
-
-        //    try
-        //    {
-        //        while (true)
-        //        {
-        //            Console.WriteLine("Waiting for broadcast");
-        //            byte[] bytes = UdpClient.Receive(ref groupEP);
-        //            Console.WriteLine($"Received {groupEP.Address}:{groupEP.Port} :- {Encoding.ASCII.GetString(bytes, 0, bytes.Length)}");
-        //        }
-        //    }
-        //    catch (SocketException e)
-        //    {
-        //        Console.WriteLine(e);
-        //    }
-        //    finally
-        //    {
-        //        UdpClient.Close();
-        //    }
-        //}
-
+        #endregion
     }
 }
