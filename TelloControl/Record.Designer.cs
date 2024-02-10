@@ -48,7 +48,7 @@
             btnCW = new Button();
             txtSpeed = new MaskedTextBox();
             label3 = new Label();
-            txtDistance = new MaskedTextBox();
+            txtDistanceAngle = new MaskedTextBox();
             label4 = new Label();
             lblTemp = new Label();
             lblBattery = new Label();
@@ -56,6 +56,12 @@
             chkRecordStart = new CheckBox();
             lblH = new Label();
             lblTime = new Label();
+            chkUseRC = new CheckBox();
+            groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            btnHover = new Button();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -105,9 +111,9 @@
             // btnRecord
             // 
             btnRecord.BackColor = Color.FromArgb(192, 255, 192);
-            btnRecord.Location = new Point(355, 86);
+            btnRecord.Location = new Point(355, 83);
             btnRecord.Name = "btnRecord";
-            btnRecord.Size = new Size(116, 51);
+            btnRecord.Size = new Size(116, 95);
             btnRecord.TabIndex = 5;
             btnRecord.Text = "Record Start";
             btnRecord.UseVisualStyleBackColor = false;
@@ -116,7 +122,7 @@
             // btnStop
             // 
             btnStop.BackColor = Color.FromArgb(255, 192, 192);
-            btnStop.Location = new Point(332, 180);
+            btnStop.Location = new Point(511, 83);
             btnStop.Name = "btnStop";
             btnStop.Size = new Size(116, 95);
             btnStop.TabIndex = 6;
@@ -126,10 +132,10 @@
             // 
             // txtLog
             // 
-            txtLog.Location = new Point(95, 378);
+            txtLog.Location = new Point(73, 489);
             txtLog.Multiline = true;
             txtLog.Name = "txtLog";
-            txtLog.Size = new Size(570, 302);
+            txtLog.Size = new Size(579, 302);
             txtLog.TabIndex = 7;
             // 
             // btnLand
@@ -154,7 +160,7 @@
             // 
             // btnLeft
             // 
-            btnLeft.Location = new Point(106, 248);
+            btnLeft.Location = new Point(9, 115);
             btnLeft.Name = "btnLeft";
             btnLeft.Size = new Size(64, 51);
             btnLeft.TabIndex = 10;
@@ -164,7 +170,7 @@
             // 
             // btnRight
             // 
-            btnRight.Location = new Point(241, 248);
+            btnRight.Location = new Point(144, 115);
             btnRight.Name = "btnRight";
             btnRight.Size = new Size(64, 51);
             btnRight.TabIndex = 11;
@@ -174,7 +180,7 @@
             // 
             // btnForward
             // 
-            btnForward.Location = new Point(176, 180);
+            btnForward.Location = new Point(79, 47);
             btnForward.Name = "btnForward";
             btnForward.Size = new Size(64, 51);
             btnForward.TabIndex = 12;
@@ -184,7 +190,7 @@
             // 
             // btnBackward
             // 
-            btnBackward.Location = new Point(169, 317);
+            btnBackward.Location = new Point(72, 184);
             btnBackward.Name = "btnBackward";
             btnBackward.Size = new Size(71, 51);
             btnBackward.TabIndex = 13;
@@ -194,7 +200,7 @@
             // 
             // btnDown
             // 
-            btnDown.Location = new Point(536, 317);
+            btnDown.Location = new Point(439, 184);
             btnDown.Name = "btnDown";
             btnDown.Size = new Size(64, 51);
             btnDown.TabIndex = 15;
@@ -204,7 +210,7 @@
             // 
             // btnUp
             // 
-            btnUp.Location = new Point(536, 180);
+            btnUp.Location = new Point(439, 47);
             btnUp.Name = "btnUp";
             btnUp.Size = new Size(64, 51);
             btnUp.TabIndex = 14;
@@ -214,7 +220,7 @@
             // 
             // btnCCW
             // 
-            btnCCW.Location = new Point(601, 248);
+            btnCCW.Location = new Point(504, 115);
             btnCCW.Name = "btnCCW";
             btnCCW.Size = new Size(64, 51);
             btnCCW.TabIndex = 17;
@@ -224,7 +230,7 @@
             // 
             // btnCW
             // 
-            btnCW.Location = new Point(466, 248);
+            btnCW.Location = new Point(369, 115);
             btnCW.Name = "btnCW";
             btnCW.Size = new Size(64, 51);
             btnCW.TabIndex = 16;
@@ -234,7 +240,7 @@
             // 
             // txtSpeed
             // 
-            txtSpeed.Location = new Point(280, 74);
+            txtSpeed.Location = new Point(280, 104);
             txtSpeed.Mask = "000";
             txtSpeed.Name = "txtSpeed";
             txtSpeed.PromptChar = ' ';
@@ -246,27 +252,27 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(235, 77);
+            label3.Location = new Point(234, 107);
             label3.Name = "label3";
             label3.Size = new Size(39, 15);
             label3.TabIndex = 19;
             label3.Text = "Speed";
             // 
-            // txtDistance
+            // txtDistanceAngle
             // 
-            txtDistance.Location = new Point(280, 101);
-            txtDistance.Mask = "000";
-            txtDistance.Name = "txtDistance";
-            txtDistance.PromptChar = ' ';
-            txtDistance.Size = new Size(37, 23);
-            txtDistance.TabIndex = 20;
-            txtDistance.Text = "40";
-            txtDistance.ValidatingType = typeof(int);
+            txtDistanceAngle.Location = new Point(280, 75);
+            txtDistanceAngle.Mask = "000";
+            txtDistanceAngle.Name = "txtDistanceAngle";
+            txtDistanceAngle.PromptChar = ' ';
+            txtDistanceAngle.Size = new Size(37, 23);
+            txtDistanceAngle.TabIndex = 20;
+            txtDistanceAngle.Text = "15";
+            txtDistanceAngle.ValidatingType = typeof(int);
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(121, 104);
+            label4.Location = new Point(121, 78);
             label4.Name = "label4";
             label4.Size = new Size(153, 15);
             label4.TabIndex = 21;
@@ -276,7 +282,7 @@
             // 
             lblTemp.AutoSize = true;
             lblTemp.ForeColor = Color.Red;
-            lblTemp.Location = new Point(702, 25);
+            lblTemp.Location = new Point(6, 29);
             lblTemp.Name = "lblTemp";
             lblTemp.Size = new Size(19, 15);
             lblTemp.TabIndex = 22;
@@ -286,7 +292,7 @@
             // 
             lblBattery.AutoSize = true;
             lblBattery.ForeColor = Color.Red;
-            lblBattery.Location = new Point(702, 54);
+            lblBattery.Location = new Point(6, 58);
             lblBattery.Name = "lblBattery";
             lblBattery.Size = new Size(17, 15);
             lblBattery.TabIndex = 23;
@@ -296,9 +302,9 @@
             // 
             btnEmergency.BackColor = SystemColors.Info;
             btnEmergency.ForeColor = Color.Red;
-            btnEmergency.Location = new Point(702, 378);
+            btnEmergency.Location = new Point(678, 192);
             btnEmergency.Name = "btnEmergency";
-            btnEmergency.Size = new Size(75, 302);
+            btnEmergency.Size = new Size(75, 599);
             btnEmergency.TabIndex = 24;
             btnEmergency.Text = "Emergency Shut off !!!";
             btnEmergency.UseVisualStyleBackColor = false;
@@ -307,7 +313,7 @@
             // chkRecordStart
             // 
             chkRecordStart.AutoSize = true;
-            chkRecordStart.Location = new Point(106, 155);
+            chkRecordStart.Location = new Point(9, 22);
             chkRecordStart.Name = "chkRecordStart";
             chkRecordStart.Size = new Size(218, 19);
             chkRecordStart.TabIndex = 25;
@@ -319,7 +325,7 @@
             // 
             lblH.AutoSize = true;
             lblH.ForeColor = Color.DodgerBlue;
-            lblH.Location = new Point(704, 86);
+            lblH.Location = new Point(8, 90);
             lblH.Name = "lblH";
             lblH.Size = new Size(14, 15);
             lblH.TabIndex = 26;
@@ -329,39 +335,82 @@
             // 
             lblTime.AutoSize = true;
             lblTime.ForeColor = Color.DodgerBlue;
-            lblTime.Location = new Point(704, 122);
+            lblTime.Location = new Point(8, 126);
             lblTime.Name = "lblTime";
             lblTime.Size = new Size(11, 15);
             lblTime.TabIndex = 27;
             lblTime.Text = "t";
             // 
+            // chkUseRC
+            // 
+            chkUseRC.AutoSize = true;
+            chkUseRC.Location = new Point(446, 22);
+            chkUseRC.Name = "chkUseRC";
+            chkUseRC.Size = new Size(127, 19);
+            chkUseRC.TabIndex = 28;
+            chkUseRC.TabStop = false;
+            chkUseRC.Text = "Use 'rc' commands";
+            chkUseRC.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(lblTime);
+            groupBox1.Controls.Add(lblTemp);
+            groupBox1.Controls.Add(lblBattery);
+            groupBox1.Controls.Add(lblH);
+            groupBox1.Location = new Point(656, 17);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(97, 160);
+            groupBox1.TabIndex = 29;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Info";
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(btnHover);
+            groupBox2.Controls.Add(btnForward);
+            groupBox2.Controls.Add(btnLeft);
+            groupBox2.Controls.Add(chkUseRC);
+            groupBox2.Controls.Add(chkRecordStart);
+            groupBox2.Controls.Add(btnRight);
+            groupBox2.Controls.Add(btnBackward);
+            groupBox2.Controls.Add(btnUp);
+            groupBox2.Controls.Add(btnDown);
+            groupBox2.Controls.Add(btnCW);
+            groupBox2.Controls.Add(btnCCW);
+            groupBox2.Location = new Point(75, 184);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(577, 273);
+            groupBox2.TabIndex = 30;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Controls";
+            // 
+            // btnHover
+            // 
+            btnHover.Location = new Point(260, 47);
+            btnHover.Name = "btnHover";
+            btnHover.Size = new Size(64, 51);
+            btnHover.TabIndex = 26;
+            btnHover.Text = "Hover";
+            btnHover.UseVisualStyleBackColor = true;
+            btnHover.Click += btnHover_Click;
+            // 
             // Record
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 696);
-            Controls.Add(lblTime);
-            Controls.Add(lblH);
-            Controls.Add(chkRecordStart);
+            ClientSize = new Size(824, 805);
+            Controls.Add(groupBox2);
+            Controls.Add(btnStop);
+            Controls.Add(groupBox1);
             Controls.Add(btnEmergency);
-            Controls.Add(lblBattery);
-            Controls.Add(lblTemp);
             Controls.Add(label4);
-            Controls.Add(txtDistance);
+            Controls.Add(txtDistanceAngle);
             Controls.Add(label3);
             Controls.Add(txtSpeed);
-            Controls.Add(btnCCW);
-            Controls.Add(btnCW);
-            Controls.Add(btnDown);
-            Controls.Add(btnUp);
-            Controls.Add(btnBackward);
-            Controls.Add(btnForward);
-            Controls.Add(btnRight);
-            Controls.Add(btnLeft);
             Controls.Add(btnConnect);
             Controls.Add(btnLand);
             Controls.Add(txtLog);
-            Controls.Add(btnStop);
             Controls.Add(btnRecord);
             Controls.Add(btnTakeOff);
             Controls.Add(txtPilot);
@@ -370,6 +419,10 @@
             Controls.Add(label1);
             Name = "Record";
             Text = "Record";
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -396,7 +449,7 @@
         private Button btnCW;
         private MaskedTextBox txtSpeed;
         private Label label3;
-        private MaskedTextBox txtDistance;
+        private MaskedTextBox txtDistanceAngle;
         private Label label4;
         private Label lblTemp;
         private Label lblBattery;
@@ -404,5 +457,9 @@
         private CheckBox chkRecordStart;
         private Label lblH;
         private Label lblTime;
+        private CheckBox chkUseRC;
+        private GroupBox groupBox1;
+        private GroupBox groupBox2;
+        private Button btnHover;
     }
 }

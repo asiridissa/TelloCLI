@@ -39,7 +39,7 @@ namespace TelloControl
             using (var commandClient = new UdpClient())
             {
                 commandClient.Connect(droneIP, commandPort);
-                var result = SendCommandAsync("takeoff", commandClient);
+                var result = SendCommandAsync(TelloCommand.takeoff.ToString(), commandClient);
             }
         }
 
@@ -49,7 +49,7 @@ namespace TelloControl
             using (var commandClient = new UdpClient())
             {
                 commandClient.Connect(droneIP, commandPort);
-                var result = SendCommandAsync("land", commandClient);
+                var result = SendCommandAsync(TelloCommand.land.ToString(), commandClient);
             }
         }
 
@@ -79,7 +79,7 @@ namespace TelloControl
             using (var commandClient = new UdpClient())
             {
                 commandClient.Connect(droneIP, commandPort);
-                await SendCommandAsync("command", commandClient);
+                await SendCommandAsync(TelloCommand.command.ToString(), commandClient);
             }
         }
 
@@ -182,64 +182,163 @@ namespace TelloControl
 
         #endregion
 
-        private async Task IssueBtnCommandAndLog(string command)
+        private int GetParsedDistanceAngle(bool negate = false)
         {
-            txtCommand.Text = command;
-            if(chkRecordStart.Checked) RecordStart();
+            var x = Math.Min(100, Convert.ToInt32(txtDistanceAngle.Text));
+            return negate ? x * -1 : x;
+        }
+
+        private async Task IssueBtnCommandAndLog(TelloCommand command)
+        {
+            if (chkRecordStart.Checked) RecordStart();
+
+            if (new[] { TelloCommand.emergency, TelloCommand.command, TelloCommand.takeoff, TelloCommand.land }.Contains(command))
+            {
+                txtCommand.Text = command.ToString();
+            }
+            else
+            {
+                var abcd = new RC(TelloCommand.rc);
+                var rcCompatible = true;
+                if (!chkUseRC.Checked)
+                    rcCompatible = false;
+                else
+                {
+                    switch (command)
+                    {
+                        case TelloCommand.left:
+                            abcd.a = GetParsedDistanceAngle(true);
+                            break;
+                        case TelloCommand.right:
+                            abcd.a = GetParsedDistanceAngle();
+                            break;
+                        case TelloCommand.up:
+                            abcd.c = GetParsedDistanceAngle();
+                            break;
+                        case TelloCommand.down:
+                            abcd.c = GetParsedDistanceAngle(true);
+                            break;
+                        case TelloCommand.forward:
+                            abcd.b = GetParsedDistanceAngle();
+                            break;
+                        case TelloCommand.back:
+                            abcd.b = GetParsedDistanceAngle(true);
+                            break;
+                        case TelloCommand.cw:
+                            abcd.d = GetParsedDistanceAngle();
+                            break;
+                        case TelloCommand.ccw:
+                            abcd.d = GetParsedDistanceAngle(true);
+                            break;
+                        case TelloCommand.hover:
+                            break;
+                        default:
+                            Log("Not rc compatible command: {command}", command.ToString());
+                            rcCompatible = false;
+                            break;
+                    }
+                }
+
+                txtCommand.Text = rcCompatible ? abcd.ToString() : $"{command} {txtDistanceAngle.Text}";
+            }
+
             using (var commandClient = new UdpClient())
             {
                 commandClient.Connect(droneIP, commandPort);
-                await SendCommandAsync(command + " " + txtDistance.Text, commandClient);
+                await SendCommandAsync(txtCommand.Text, commandClient);
             }
         }
 
         private async void btnLeft_Click(object sender, EventArgs e)
         {
-            await IssueBtnCommandAndLog("left");
+            await IssueBtnCommandAndLog(TelloCommand.left);
         }
 
         private async void btnRight_Click(object sender, EventArgs e)
         {
-            await IssueBtnCommandAndLog("right");
+            await IssueBtnCommandAndLog(TelloCommand.right);
         }
 
         private async void btnForward_Click(object sender, EventArgs e)
         {
-            await IssueBtnCommandAndLog("forward");
+            await IssueBtnCommandAndLog(TelloCommand.forward);
         }
 
         private async void btnBackward_Click(object sender, EventArgs e)
         {
-            await IssueBtnCommandAndLog("back");
+            await IssueBtnCommandAndLog(TelloCommand.back);
 
         }
 
         private async void btnUp_Click(object sender, EventArgs e)
         {
-            await IssueBtnCommandAndLog("up");
+            await IssueBtnCommandAndLog(TelloCommand.up);
 
         }
 
         private async void btnDown_Click(object sender, EventArgs e)
         {
-            await IssueBtnCommandAndLog("down");
+            await IssueBtnCommandAndLog(TelloCommand.down);
 
         }
 
         private async void btnCCW_Click(object sender, EventArgs e)
         {
-            await IssueBtnCommandAndLog("ccw");
+            await IssueBtnCommandAndLog(TelloCommand.ccw);
 
         }
 
         private async void btnCW_Click(object sender, EventArgs e)
         {
-            await IssueBtnCommandAndLog("cw");
+            await IssueBtnCommandAndLog(TelloCommand.cw);
         }
 
         private async void btnEmergency_Click(object sender, EventArgs e)
         {
-            await IssueBtnCommandAndLog("emergency");
+            await IssueBtnCommandAndLog(TelloCommand.emergency);
+        }
+
+        private async void btnHover_Click(object sender, EventArgs e)
+        {
+            await IssueBtnCommandAndLog(TelloCommand.hover);
+        }
+    }
+
+    public enum TelloCommand
+    {
+        emergency,
+        command,
+        takeoff,
+        land,
+        left,
+        right,
+        up,
+        down,
+        forward,
+        back,
+        cw,
+        ccw,
+        rc,
+        hover
+    }
+
+    public class RC
+    {
+        private readonly TelloCommand _command;
+
+        public RC(TelloCommand command)
+        {
+            _command = command;
+        }
+
+        public int a { get; set; }
+        public int b { get; set; }
+        public int c { get; set; }
+        public int d { get; set; }
+
+        public override string ToString()
+        {
+            return $"{_command} {a} {b} {c} {d}".Trim();
         }
     }
 }
