@@ -55,15 +55,20 @@ namespace TelloControl
 
         private void btnRecord_Click(object sender, EventArgs e)
         {
-            RecordStart();
+            txtCommand.Text = "";
+            RecordStart("all", true);
         }
 
-        private async Task RecordStart()
+        private async Task RecordStart(string? suffix = null, bool newFile = false)
         {
-            timestamp = DateTime.Now.ToString("MMdd_HHmmss");
-            csvFilePath = Path.Combine(baseFolder, $"{txtPilot.Text}_{timestamp}_{txtCommand.Text}.csv");
-            txtFilePath = Path.Combine(baseFolder, $"{txtPilot.Text}_{timestamp}_{txtCommand.Text}.txt");
-            Recording = true;
+            Recording = !newFile;
+            if (!Recording)
+            {
+                timestamp = DateTime.Now.ToString("MMdd_HHmmss");
+                csvFilePath = Path.Combine(baseFolder, $"{txtPilot.Text} {timestamp} {txtCommand.Text} {suffix}.csv").Trim().Replace(" ", "_");
+                txtFilePath = Path.Combine(baseFolder, $"{txtPilot.Text} {timestamp} {txtCommand.Text} {suffix}.txt").Trim().Replace(" ", "_");
+                Recording = true;
+            }
             await RecordFlightLogAsync(telemetryPort, csvFilePath);
         }
 
@@ -94,19 +99,19 @@ namespace TelloControl
 
         async Task RecordFlightLogAsync(int telemetryPort, string filePath)
         {
-            try
+            using (var telemetryClient = new UdpClient(telemetryPort))
             {
-                using (var telemetryClient = new UdpClient(telemetryPort))
+                try
                 {
                     using (var logFile = new StreamWriter(filePath))
                     {
-                        txtLog.AppendText("Writing start to file : " + filePath + Environment.NewLine);
+                        Log("Recording start to file : " + filePath);
                         logFile.WriteLine("Pilot,timestamp_ms,command,pitch,roll,yaw,vgx,vgy,vgz,templ,temph,tof,h,bat,baro,time,agx,agy,agz");
                         var startTime = DateTime.Now;
 
                         while (Recording)
                         {
-                            string telemetryData = await ReceiveTelemetryDataAsync(telemetryClient);
+                            string telemetryData = await ReceiveTelemetryDataAsync(telemetryClient).WaitAsync(TimeSpan.FromSeconds(15));
                             telemetryData = telemetryData.TrimEnd('\n', '\r');
                             var elapsedTime = (DateTime.Now - startTime).TotalMilliseconds;
                             var csvLine = ConvertToCsvLine(telemetryData, startTime);
@@ -116,14 +121,14 @@ namespace TelloControl
                             lblTime.Text = $"{csvLine[12]} t";
                             await logFile.WriteLineAsync(string.Join(",", txtPilot.Text, elapsedTime.ToString(), txtCommand.Text, string.Join(",", csvLine)));
                         }
-
-                        txtLog.AppendText("Writing complete to file : " + filePath + Environment.NewLine);
+                        Log("Recording complete to file : {0}", filePath);
                     }
+                    Log("UDP client closing {0}", telemetryClient.Client.RemoteEndPoint?.ToString());
                 }
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
+                catch (Exception e)
+                {
+                    Log("Receiving Telemetry Error: " + e.Message);
+                }
             }
         }
 
@@ -161,9 +166,7 @@ namespace TelloControl
             {
                 sb.AppendLine(s);
             }
-            //Console.ForegroundColor = text.Trim().Contains("Add") ? ConsoleColor.DarkGray : ConsoleColor.White;
             var msg = sb.ToString();
-            //Log(msg, Console.ForegroundColor);
             txtLog.AppendText(msg + Environment.NewLine);
             await FileWriteAsync(msg);
             Task.Delay(100);
@@ -190,16 +193,15 @@ namespace TelloControl
 
         private async Task IssueBtnCommandAndLog(TelloCommand command)
         {
-            if (chkRecordStart.Checked) RecordStart();
-
+            var rcCompatible = true;
             if (new[] { TelloCommand.emergency, TelloCommand.command, TelloCommand.takeoff, TelloCommand.land }.Contains(command))
             {
                 txtCommand.Text = command.ToString();
+                rcCompatible = false;
             }
             else
             {
                 var abcd = new RC(TelloCommand.rc);
-                var rcCompatible = true;
                 if (!chkUseRC.Checked)
                     rcCompatible = false;
                 else
@@ -233,7 +235,7 @@ namespace TelloControl
                         case TelloCommand.hover:
                             break;
                         default:
-                            Log("Not rc compatible command: {command}", command.ToString());
+                            Log("Not rc compatible command: {0}", command.ToString());
                             rcCompatible = false;
                             break;
                     }
@@ -241,6 +243,8 @@ namespace TelloControl
 
                 txtCommand.Text = rcCompatible ? abcd.ToString() : $"{command} {txtDistanceAngle.Text}";
             }
+
+            if (chkRecordStart.Checked) RecordStart(rcCompatible ? command.ToString() : "", true);
 
             using (var commandClient = new UdpClient())
             {
