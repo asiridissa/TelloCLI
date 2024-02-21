@@ -36,17 +36,26 @@ class Program
 
     static async Task ControlDroneAsync(UdpClient client)
     {
+        Log(DateTime.Now.Ticks.ToString());
         await SendCommandAsync("command", client);
+        Log(DateTime.Now.Ticks.ToString());
         await SendCommandAsync("takeoff", client);
+        Log(DateTime.Now.Ticks.ToString());
         await Task.Delay(5000); // Allow time for takeoff
 
+        Log(DateTime.Now.Ticks.ToString());
         await SendCommandAsync("go 0 20 0 20", client); // Turn left
-        await Task.Delay(5000); // Allow time for turn
+        Log(DateTime.Now.Ticks.ToString());
+        await Task.Delay(3000); // Allow time for turn
 
-        await SendCommandAsync("go 20 0 0 20", client); // Turn left
-        await Task.Delay(5000); // Allow time for turn
+        Log(DateTime.Now.Ticks.ToString());
+        await SendCommandAsync("go 0 -20 0 -20", client); // Turn left
+        Log(DateTime.Now.Ticks.ToString());
+        await Task.Delay(3000); // Allow time for turn
 
+        Log(DateTime.Now.Ticks.ToString());
         await SendCommandAsync("land", client); // Land
+        Log(DateTime.Now.Ticks.ToString());
     }
 
     static async Task SendCommandAsync(string command, UdpClient client)
