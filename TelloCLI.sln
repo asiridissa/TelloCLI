@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TelloControl", "TelloContro
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App2", "App2\App2.csproj", "{016B063F-EABB-4CBE-913E-9A76BFAD9AF3}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Replay", "Replay\Replay.csproj", "{53DB9AF3-64DD-400E-AED3-CE788A051BCF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{016B063F-EABB-4CBE-913E-9A76BFAD9AF3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{016B063F-EABB-4CBE-913E-9A76BFAD9AF3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{016B063F-EABB-4CBE-913E-9A76BFAD9AF3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53DB9AF3-64DD-400E-AED3-CE788A051BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53DB9AF3-64DD-400E-AED3-CE788A051BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53DB9AF3-64DD-400E-AED3-CE788A051BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53DB9AF3-64DD-400E-AED3-CE788A051BCF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
