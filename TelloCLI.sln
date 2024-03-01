@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App2", "App2\App2.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Replay", "Replay\Replay.csproj", "{53DB9AF3-64DD-400E-AED3-CE788A051BCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommandClassification", "CommandClassification\CommandClassification.csproj", "{15F61298-A946-4F74-9862-E5A8E33A7A2F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{53DB9AF3-64DD-400E-AED3-CE788A051BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53DB9AF3-64DD-400E-AED3-CE788A051BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53DB9AF3-64DD-400E-AED3-CE788A051BCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15F61298-A946-4F74-9862-E5A8E33A7A2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15F61298-A946-4F74-9862-E5A8E33A7A2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15F61298-A946-4F74-9862-E5A8E33A7A2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15F61298-A946-4F74-9862-E5A8E33A7A2F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
