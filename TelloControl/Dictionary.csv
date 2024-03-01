@@ -1,0 +1,193 @@
+﻿Text,Category
+"Go up",GO UP 
+"Fly up",GO UP 
+"Move up",GO UP 
+"Go up little",GO UP Little
+"Go up a little",GO UP Little
+"Go up little bit",GO UP Little
+"Fly up little",GO UP Little
+"Fly up a little",GO UP Little
+"Fly up little bit",GO UP Little
+"Move up little",GO UP Little
+"Move up a little",GO UP Little
+"Move up little bit",GO UP Little
+"Go up lot",GO UP Lot
+"go up a lot",GO UP Lot
+"Fly up lot",GO UP Lot
+"Fly up a lot",GO UP Lot
+"Move up lot",GO UP Lot
+"Move up a lot",GO UP Lot
+"Go down",GO Down 
+"Fly down",GO Down 
+"Move down",GO Down 
+"Go down little",GO Down Little
+"Go down a little",GO Down Little
+"Go down little bit",GO Down Little
+"Fly down little",GO Down Little
+"Fly down a little",GO Down Little
+"Fly down little bit",GO Down Little
+"Move down little",GO Down Little
+"Move down a little",GO Down Little
+"Move down little bit",GO Down Little
+"Go down lot",GO Down Lot
+"Go down a lot",GO Down Lot
+"Fly down lot",GO Down Lot
+"Fly down a lot",GO Down Lot
+"Move down lot",GO Down Lot
+"Move down a lot",GO Down Lot
+"Go Left",GO Left 
+"Fly Left",GO Left 
+"Move Left",GO Left 
+"Go Left little",GO Left Little
+"Go Left a little",GO Left Little
+"Go Left little bit",GO Left Little
+"Fly Left little",GO Left Little
+"Fly Left a little",GO Left Little
+"Fly Left little bit",GO Left Little
+"Move Left little",GO Left Little
+"Move Left a little",GO Left Little
+"Move Left little bit",GO Left Little
+"Go Left lot",GO Left Lot
+"go Left a lot",GO Left Lot
+"Fly Left lot",GO Left Lot
+"Fly Left a lot",GO Left Lot
+"Move Left lot",GO Left Lot
+"Move Left a lot",GO Left Lot
+"Go Right",GO Right 
+"Fly Right",GO Right 
+"Move Right",GO Right 
+"Go Right little",GO Right Little
+"Go Right a little",GO Right Little
+"Go Right little bit",GO Right Little
+"Fly Right little",GO Right Little
+"Fly Right a little",GO Right Little
+"Fly Right little bit",GO Right Little
+"Move Right little",GO Right Little
+"Move Right a little",GO Right Little
+"Move Right little bit",GO Right Little
+"Go Right lot",GO Right Lot
+"go Right a lot",GO Right Lot
+"Fly Right lot",GO Right Lot
+"Fly Right a lot",GO Right Lot
+"Move Right lot",GO Right Lot
+"Move Right a lot",GO Right Lot
+"Go Forward",GO Forward 
+"Fly Forward",GO Forward 
+"Move Forward",GO Forward 
+"Go Forward little",GO Forward Little
+"Go Forward a little",GO Forward Little
+"Go Forward little bit",GO Forward Little
+"Fly Forward little",GO Forward Little
+"Fly Forward a little",GO Forward Little
+"Fly Forward little bit",GO Forward Little
+"Move Forward little",GO Forward Little
+"Move Forward a little",GO Forward Little
+"Move Forward little bit",GO Forward Little
+"Go Forward lot",GO Forward Lot
+"go Forward a lot",GO Forward Lot
+"Fly Forward lot",GO Forward Lot
+"Fly Forward a lot",GO Forward Lot
+"Move Forward lot",GO Forward Lot
+"Move Forward a lot",GO Forward Lot
+"Go Front",GO Forward 
+"Fly Front",GO Forward 
+"Move Front",GO Forward 
+"Go Front little",GO Forward Little
+"Go Front a little",GO Forward Little
+"Go Front little bit",GO Forward Little
+"Fly Front little",GO Forward Little
+"Fly Front a little",GO Forward Little
+"Fly Front little bit",GO Forward Little
+"Move Front little",GO Forward Little
+"Move Front a little",GO Forward Little
+"Move Front little bit",GO Forward Little
+"Go Front lot",GO Forward Lot
+"go Front a lot",GO Forward Lot
+"Fly Front lot",GO Forward Lot
+"Fly Front a lot",GO Forward Lot
+"Move Front lot",GO Forward Lot
+"Move Front a lot",GO Forward Lot
+"Go Back",GO Back 
+"Fly Back",GO Back 
+"Move Back",GO Back 
+"Go Back little",GO Back Little
+"Go Back a little",GO Back Little
+"Go Back little bit",GO Back Little
+"Fly Back little",GO Back Little
+"Fly Back a little",GO Back Little
+"Fly Back little bit",GO Back Little
+"Move Back little",GO Back Little
+"Move Back a little",GO Back Little
+"Move Back little bit",GO Back Little
+"Go Back lot",GO Back Lot
+"go Back a lot",GO Back Lot
+"Fly Back lot",GO Back Lot
+"Fly Back a lot",GO Back Lot
+"Move Back lot",GO Back Lot
+"Move Back a lot",GO Back Lot
+"Go Backward",GO Back 
+"Fly Backward",GO Back 
+"Move Backward",GO Back 
+"Go Backward little",GO Back Little
+"Go Backward a little",GO Back Little
+"Go Backward little bit",GO Back Little
+"Fly Backward little",GO Back Little
+"Fly Backward a little",GO Back Little
+"Fly Backward little bit",GO Back Little
+"Move Backward little",GO Back Little
+"Move Backward a little",GO Back Little
+"Move Backward little bit",GO Back Little
+"Go Backward lot",GO Back Lot
+"go Backward a lot",GO Back Lot
+"Fly Backward lot",GO Back Lot
+"Fly Backward a lot",GO Back Lot
+"Move Backward lot",GO Back Lot
+"Move Backward a lot",GO Back Lot
+"Go Reverse",GO Back 
+"Fly Reverse",GO Back 
+"Move Reverse",GO Back 
+"Go Reverse little",GO Back Little
+"Go Reverse a little",GO Back Little
+"Go Reverse little bit",GO Back Little
+"Fly Reverse little",GO Back Little
+"Fly Reverse a little",GO Back Little
+"Fly Reverse little bit",GO Back Little
+"Move Reverse little",GO Back Little
+"Move Reverse a little",GO Back Little
+"Move Reverse little bit",GO Back Little
+"Go Reverse lot",GO Back Lot
+"go Reverse a lot",GO Back Lot
+"Fly Reverse lot",GO Back Lot
+"Fly Reverse a lot",GO Back Lot
+"Move Reverse lot",GO Back Lot
+"Move Reverse a lot",GO Back Lot
+"Turn left",Turn left
+"Turn left little",Turn left little 
+"Turn left a little",Turn left little 
+"Rotate left",Turn left
+"Rotate left little",Turn left little 
+"Rotate left a little",Turn left little 
+"Turn left lot",Turn left lot 
+"Turn left a lot",Turn left lot 
+"Rotate left lot",Turn left lot 
+"Rotate left a lot",Turn left lot 
+"Turn right",Turn right 
+"Turn right little",Turn right little 
+"Turn right a little",Turn right little 
+"Rotate right",Turn right 
+"Rotate right little",Turn right little 
+"Protect right a little",Turn right little 
+"Turn right lot",Turn right lot 
+"Turn right a lot",Turn right lot 
+"Rotate right lot",Turn right lot 
+"Rotate right a lot",Turn right lot 
+"Hover",Hover
+"Stop",Hover
+"Hold",Hover
+"Wait",Hover
+"Pause",Hover
+"Emergency",Emergency 
+"Shutdown",Emergency 
+"Mayday",Emergency 
+"Mayday mayday",Emergency 
+"",Hover

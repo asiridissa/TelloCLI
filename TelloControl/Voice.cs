@@ -97,7 +97,7 @@ namespace TelloControl
                         {
                             Invoke(new Action(() =>
                             {
-                                console.AppendText($"Transcript: {alternative.Transcript}, Confidence: {alternative.Confidence}" + Environment.NewLine);
+                                console.AppendText($"Transcript: {alternative.Transcript}, Confidence: {alternative.Confidence}, Command : {TextCommandMapping.GetCommand(alternative.Transcript)}" + Environment.NewLine);
                                 console.ScrollToCaret();
                                 IssueVoiceCommand(alternative.Transcript);
                             }));
