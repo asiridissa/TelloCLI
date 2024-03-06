@@ -166,7 +166,8 @@
             btnLeft.TabIndex = 10;
             btnLeft.Text = "Left";
             btnLeft.UseVisualStyleBackColor = true;
-            btnLeft.Click += btnLeft_Click;
+            btnLeft.MouseDown += btnLeft_Click;
+            btnLeft.MouseUp += btnHover_Click;
             // 
             // btnRight
             // 
@@ -176,7 +177,8 @@
             btnRight.TabIndex = 11;
             btnRight.Text = "Right";
             btnRight.UseVisualStyleBackColor = true;
-            btnRight.Click += btnRight_Click;
+            btnRight.MouseDown += btnRight_Click;
+            btnRight.MouseUp += btnHover_Click;
             // 
             // btnForward
             // 
@@ -186,7 +188,8 @@
             btnForward.TabIndex = 12;
             btnForward.Text = "Forward";
             btnForward.UseVisualStyleBackColor = true;
-            btnForward.Click += btnForward_Click;
+            btnForward.MouseDown += btnForward_Click;
+            btnForward.MouseUp += btnHover_Click;
             // 
             // btnBackward
             // 
@@ -196,7 +199,8 @@
             btnBackward.TabIndex = 13;
             btnBackward.Text = "Backward";
             btnBackward.UseVisualStyleBackColor = true;
-            btnBackward.Click += btnBackward_Click;
+            btnBackward.MouseDown += btnBackward_Click;
+            btnBackward.MouseUp += btnHover_Click;
             // 
             // btnDown
             // 
@@ -206,7 +210,8 @@
             btnDown.TabIndex = 15;
             btnDown.Text = "Down";
             btnDown.UseVisualStyleBackColor = true;
-            btnDown.Click += btnDown_Click;
+            btnDown.MouseDown += btnDown_Click;
+            btnDown.MouseUp += btnHover_Click;
             // 
             // btnUp
             // 
@@ -216,7 +221,8 @@
             btnUp.TabIndex = 14;
             btnUp.Text = "Up";
             btnUp.UseVisualStyleBackColor = true;
-            btnUp.Click += btnUp_Click;
+            btnUp.MouseDown += btnUp_Click;
+            btnUp.MouseUp += btnHover_Click;
             // 
             // btnCCW
             // 
@@ -226,7 +232,8 @@
             btnCCW.TabIndex = 17;
             btnCCW.Text = "CCW";
             btnCCW.UseVisualStyleBackColor = true;
-            btnCCW.Click += btnCCW_Click;
+            btnCCW.MouseDown += btnCCW_Click;
+            btnCCW.MouseUp += btnHover_Click;
             // 
             // btnCW
             // 
@@ -236,7 +243,8 @@
             btnCW.TabIndex = 16;
             btnCW.Text = "CW";
             btnCW.UseVisualStyleBackColor = true;
-            btnCW.Click += btnCW_Click;
+            btnCW.MouseDown += btnCW_Click;
+            btnCW.MouseUp += btnHover_Click;
             // 
             // txtSpeed
             // 
