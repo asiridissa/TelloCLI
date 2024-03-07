@@ -45,6 +45,19 @@
             btnStop = new Button();
             btnRecord = new Button();
             chkRecordStart = new CheckBox();
+            btnIncorrect = new Button();
+            btnCorrect = new Button();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
+            txtIncorrect = new TextBox();
+            label6 = new Label();
+            groupBox1 = new GroupBox();
+            groupBox2 = new GroupBox();
+            label7 = new Label();
+            textBox2 = new TextBox();
+            groupBox1.SuspendLayout();
+            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // console
@@ -55,48 +68,50 @@
             console.Location = new Point(134, 2);
             console.Name = "console";
             console.ReadOnly = true;
-            console.Size = new Size(586, 462);
+            console.Size = new Size(586, 478);
             console.TabIndex = 0;
             console.TabStop = false;
             console.Text = "";
             // 
             // siLK
             // 
-            siLK.Location = new Point(26, 12);
+            siLK.Location = new Point(26, 73);
             siLK.Name = "siLK";
             siLK.Size = new Size(75, 23);
             siLK.TabIndex = 1;
             siLK.Text = "si-LK";
             siLK.UseVisualStyleBackColor = true;
+            siLK.Visible = false;
             siLK.Click += siLK_Click;
             // 
             // enUS
             // 
-            enUS.Location = new Point(26, 51);
+            enUS.Location = new Point(12, 102);
             enUS.Name = "enUS";
-            enUS.Size = new Size(75, 23);
+            enUS.Size = new Size(102, 74);
             enUS.TabIndex = 2;
-            enUS.Text = "en-US";
+            enUS.Text = "Start Voice Recognittion";
             enUS.UseVisualStyleBackColor = true;
             enUS.Click += enUS_Click;
             // 
             // btnTelemetry
             // 
-            btnTelemetry.Location = new Point(26, 90);
+            btnTelemetry.Location = new Point(26, 182);
             btnTelemetry.Name = "btnTelemetry";
             btnTelemetry.Size = new Size(75, 23);
             btnTelemetry.TabIndex = 4;
             btnTelemetry.Text = "Log Toggle";
             btnTelemetry.UseVisualStyleBackColor = true;
+            btnTelemetry.Visible = false;
             btnTelemetry.Click += btnTelemetry_Click;
             // 
             // btnConnect
             // 
-            btnConnect.Location = new Point(26, 131);
+            btnConnect.Location = new Point(12, 20);
             btnConnect.Name = "btnConnect";
-            btnConnect.Size = new Size(75, 23);
+            btnConnect.Size = new Size(102, 47);
             btnConnect.TabIndex = 5;
-            btnConnect.Text = "Connect";
+            btnConnect.Text = "Connect to Drone";
             btnConnect.UseVisualStyleBackColor = true;
             btnConnect.Click += btnConnect_Click;
             // 
@@ -142,16 +157,16 @@
             // 
             // txtPilot
             // 
-            txtPilot.Location = new Point(81, 489);
+            txtPilot.Location = new Point(84, 22);
             txtPilot.Name = "txtPilot";
-            txtPilot.Size = new Size(141, 23);
+            txtPilot.Size = new Size(159, 23);
             txtPilot.TabIndex = 35;
             txtPilot.Text = "Test User 1";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(11, 494);
+            label2.Location = new Point(14, 27);
             label2.Name = "label2";
             label2.Size = new Size(30, 15);
             label2.TabIndex = 34;
@@ -159,16 +174,16 @@
             // 
             // txtCommand
             // 
-            txtCommand.Location = new Point(81, 518);
+            txtCommand.Location = new Point(84, 51);
             txtCommand.Name = "txtCommand";
-            txtCommand.Size = new Size(141, 23);
+            txtCommand.Size = new Size(159, 23);
             txtCommand.TabIndex = 33;
             txtCommand.Text = "Left";
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(11, 521);
+            label1.Location = new Point(14, 54);
             label1.Name = "label1";
             label1.Size = new Size(64, 15);
             label1.TabIndex = 32;
@@ -180,7 +195,7 @@
             btnEmergency.ForeColor = Color.Red;
             btnEmergency.Location = new Point(739, 147);
             btnEmergency.Name = "btnEmergency";
-            btnEmergency.Size = new Size(75, 317);
+            btnEmergency.Size = new Size(75, 333);
             btnEmergency.TabIndex = 38;
             btnEmergency.Text = "Emergency Shut off !!!";
             btnEmergency.UseVisualStyleBackColor = false;
@@ -189,7 +204,7 @@
             // btnStop
             // 
             btnStop.BackColor = Color.FromArgb(255, 192, 192);
-            btnStop.Location = new Point(604, 470);
+            btnStop.Location = new Point(136, 158);
             btnStop.Name = "btnStop";
             btnStop.Size = new Size(116, 95);
             btnStop.TabIndex = 37;
@@ -200,9 +215,9 @@
             // btnRecord
             // 
             btnRecord.BackColor = Color.FromArgb(192, 255, 192);
-            btnRecord.Location = new Point(482, 476);
+            btnRecord.Location = new Point(12, 159);
             btnRecord.Name = "btnRecord";
-            btnRecord.Size = new Size(116, 51);
+            btnRecord.Size = new Size(116, 94);
             btnRecord.TabIndex = 36;
             btnRecord.Text = "Record Start";
             btnRecord.UseVisualStyleBackColor = false;
@@ -211,7 +226,7 @@
             // chkRecordStart
             // 
             chkRecordStart.AutoSize = true;
-            chkRecordStart.Location = new Point(248, 489);
+            chkRecordStart.Location = new Point(15, 134);
             chkRecordStart.Name = "chkRecordStart";
             chkRecordStart.Size = new Size(218, 19);
             chkRecordStart.TabIndex = 39;
@@ -219,19 +234,134 @@
             chkRecordStart.Text = "Recoirding starts with the command";
             chkRecordStart.UseVisualStyleBackColor = true;
             // 
+            // btnIncorrect
+            // 
+            btnIncorrect.BackColor = Color.FromArgb(255, 192, 192);
+            btnIncorrect.Location = new Point(15, 115);
+            btnIncorrect.Name = "btnIncorrect";
+            btnIncorrect.Size = new Size(113, 53);
+            btnIncorrect.TabIndex = 40;
+            btnIncorrect.Text = "Incorrect++";
+            btnIncorrect.UseVisualStyleBackColor = false;
+            btnIncorrect.Click += btnIncorrect_Click;
+            // 
+            // btnCorrect
+            // 
+            btnCorrect.BackColor = Color.FromArgb(192, 255, 192);
+            btnCorrect.Location = new Point(136, 117);
+            btnCorrect.Name = "btnCorrect";
+            btnCorrect.Size = new Size(107, 51);
+            btnCorrect.TabIndex = 41;
+            btnCorrect.Text = "Correct++";
+            btnCorrect.UseVisualStyleBackColor = false;
+            btnCorrect.Click += btnCorrect_Click;
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(15, 38);
+            label3.Name = "label3";
+            label3.Size = new Size(100, 15);
+            label3.TabIndex = 42;
+            label3.Text = "Accuracy counter";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.ForeColor = Color.Green;
+            label4.Location = new Point(121, 38);
+            label4.Name = "label4";
+            label4.Size = new Size(52, 15);
+            label4.TabIndex = 43;
+            label4.Text = "Correct: ";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.ForeColor = Color.Red;
+            label5.Location = new Point(121, 58);
+            label5.Name = "label5";
+            label5.Size = new Size(60, 15);
+            label5.TabIndex = 44;
+            label5.Text = "Incorrect: ";
+            // 
+            // txtIncorrect
+            // 
+            txtIncorrect.Location = new Point(15, 86);
+            txtIncorrect.Name = "txtIncorrect";
+            txtIncorrect.Size = new Size(228, 23);
+            txtIncorrect.TabIndex = 45;
+            txtIncorrect.TextChanged += txtIncorrect_TextChanged;
+            // 
+            // label6
+            // 
+            label6.AutoSize = true;
+            label6.Location = new Point(15, 68);
+            label6.Name = "label6";
+            label6.Size = new Size(67, 15);
+            label6.TabIndex = 46;
+            label6.Text = "Description";
+            // 
+            // groupBox1
+            // 
+            groupBox1.Controls.Add(btnIncorrect);
+            groupBox1.Controls.Add(label6);
+            groupBox1.Controls.Add(btnCorrect);
+            groupBox1.Controls.Add(txtIncorrect);
+            groupBox1.Controls.Add(label3);
+            groupBox1.Controls.Add(label5);
+            groupBox1.Controls.Add(label4);
+            groupBox1.Location = new Point(862, 20);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(262, 185);
+            groupBox1.TabIndex = 47;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Accuracy";
+            groupBox1.Enter += groupBox1_Enter;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(textBox2);
+            groupBox2.Controls.Add(label7);
+            groupBox2.Controls.Add(txtPilot);
+            groupBox2.Controls.Add(btnRecord);
+            groupBox2.Controls.Add(btnStop);
+            groupBox2.Controls.Add(label1);
+            groupBox2.Controls.Add(chkRecordStart);
+            groupBox2.Controls.Add(txtCommand);
+            groupBox2.Controls.Add(label2);
+            groupBox2.Location = new Point(862, 211);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(262, 269);
+            groupBox2.TabIndex = 48;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Log Recording";
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Location = new Point(15, 87);
+            label7.Name = "label7";
+            label7.Size = new Size(103, 15);
+            label7.TabIndex = 41;
+            label7.Text = "Control Condition";
+            // 
+            // textBox2
+            // 
+            textBox2.Location = new Point(15, 105);
+            textBox2.Name = "textBox2";
+            textBox2.Size = new Size(228, 23);
+            textBox2.TabIndex = 42;
+            textBox2.Text = "Normal";
+            // 
             // Voice
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(826, 623);
-            Controls.Add(chkRecordStart);
+            ClientSize = new Size(1144, 497);
+            Controls.Add(groupBox2);
+            Controls.Add(groupBox1);
             Controls.Add(btnEmergency);
-            Controls.Add(btnStop);
-            Controls.Add(btnRecord);
-            Controls.Add(txtPilot);
-            Controls.Add(label2);
-            Controls.Add(txtCommand);
-            Controls.Add(label1);
             Controls.Add(lblTime);
             Controls.Add(lblH);
             Controls.Add(lblBattery);
@@ -243,6 +373,11 @@
             Controls.Add(console);
             Name = "Voice";
             Text = "Voice";
+            Load += Voice_Load;
+            groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -266,5 +401,16 @@
         private Button btnStop;
         private Button btnRecord;
         private CheckBox chkRecordStart;
+        private Button btnIncorrect;
+        private Button btnCorrect;
+        private Label label3;
+        private Label label4;
+        private Label label5;
+        private TextBox txtIncorrect;
+        private Label label6;
+        private GroupBox groupBox1;
+        private GroupBox groupBox2;
+        private TextBox textBox2;
+        private Label label7;
     }
 }

@@ -1,7 +1,9 @@
-﻿using System.Text;
+﻿using System.Diagnostics;
+using System.Text;
 using Google.Cloud.Speech.V1;
 using NAudio.Wave;
 using System.Net.Sockets;
+using Timer = System.Threading.Timer;
 
 namespace TelloControl
 {
@@ -16,6 +18,8 @@ namespace TelloControl
         static string baseFolder = "Logs";
         string csvFilePath = Path.Combine(baseFolder, $"TelloFlightLog_{timestamp}.csv"); // Log file path
         string txtFilePath = Path.Combine(baseFolder, $"TelloFlightLog_{timestamp}.txt"); // Log file path
+        string countersFilePath = Path.Combine(baseFolder, $"Counters.txt"); // Log file path
+        string delaysFilePath = Path.Combine(baseFolder, $"Delays.txt"); // Log file path
         string droneIP = "192.168.10.1"; // Tello IP
         int commandPort = 8889; // Command port
         int telemetryPort = 8890; // Telemetry data port
@@ -86,10 +90,12 @@ namespace TelloControl
             waveIn.StartRecording();
             console.AppendText("Speak now...\n");
 
+            var stopwatch = new Stopwatch();
             Task.Run(async () =>
             {
                 await foreach (var response in streamingCall.GetResponseStream())
                 {
+                    stopwatch.Start();
                     foreach (var result in response.Results)
                     {
                         //if (result.IsFinal)
@@ -97,9 +103,12 @@ namespace TelloControl
                         {
                             Invoke(new Action(() =>
                             {
-                                console.AppendText($"Transcript: {alternative.Transcript}, Confidence: {alternative.Confidence}, Command : {TextCommandMapping.GetCommand(alternative.Transcript)}" + Environment.NewLine);
+                                console.AppendText($"Transcript: {alternative.Transcript}, Confidence: {alternative.Confidence}, Command : {TextCommandMapping.GetCommandClass(alternative.Transcript)}" + Environment.NewLine);
+                                Log(delaysFilePath, $"Text delay,{stopwatch.ElapsedTicks}"); // 1 tick = 100ns 
                                 console.ScrollToCaret();
                                 IssueVoiceCommand(alternative.Transcript);
+                                Log(delaysFilePath, $"Command delay,{stopwatch.ElapsedTicks}");
+                                stopwatch.Reset();
                             }));
                         }
                     }
@@ -115,8 +124,10 @@ namespace TelloControl
                 { "take off", "takeoff" },
             };
 
-            KeyValuePair<string, string>? val = dic.FirstOrDefault(x => x.Key == command.Trim());
-            _ = IssueBtnCommandAndLog(val.Value.Key?.Length > 0 ? val.Value.Value.ToLower() : command.Trim().ToLower());
+            //List<(TimeSpan, string)> commands = TextCommandMapping.GetCommand(command);
+
+            //KeyValuePair<string, string>? val = dic.FirstOrDefault(x => x.Key == command.Trim());
+            //_ = IssueBtnCommandAndLog(val.Value.Key?.Length > 0 ? val.Value.Value.ToLower() : command.Trim().ToLower());
         }
 
         private void btnTelemetry_Click(object sender, EventArgs e)
@@ -134,11 +145,11 @@ namespace TelloControl
 
         async Task SendCommandAsync(string command, UdpClient client)
         {
-            Log(command);
+            Log(txtFilePath, command);
             var commandBytes = Encoding.ASCII.GetBytes(command);
             await client.SendAsync(commandBytes, commandBytes.Length);
             var result = await client.ReceiveAsync();
-            Log(Encoding.ASCII.GetString(result.Buffer));
+            Log(txtFilePath, Encoding.ASCII.GetString(result.Buffer));
         }
 
         private async Task IssueBtnCommandAndLog(string command)
@@ -187,7 +198,7 @@ namespace TelloControl
                     using (var logFile = new StreamWriter(filePath))
                     {
                         console.AppendText("Writing start to file : " + filePath + Environment.NewLine);
-                        logFile.WriteLine("Pilot,timestamp_ms,command,pitch,roll,yaw,vgx,vgy,vgz,templ,temph,tof,h,bat,baro,time,agx,agy,agz");
+                        logFile.WriteLine("Pilot,timestamp_ms,command,condition,pitch,roll,yaw,vgx,vgy,vgz,templ,temph,tof,h,bat,baro,time,agx,agy,agz");
                         var startTime = DateTime.Now;
 
                         while (Recording)
@@ -222,7 +233,7 @@ namespace TelloControl
                 case "ok":
                 case "error":
                 case "error Not joystick":
-                    Log(ascii);
+                    Log(txtFilePath, ascii);
                     break;
             }
             return ascii;
@@ -237,10 +248,10 @@ namespace TelloControl
 
         #region Logs
 
-        public async Task Log(string text, params string[] @params)
+        public async Task Log(string filePath, string text, params string[] @params)
         {
             var sb = new StringBuilder();
-            var prefix = $"{DateTime.Now:yy/MM/dd HH:mm:ss.fff} | ";
+            var prefix = $"{DateTime.Now:yy/MM/dd HH:mm:ss.fff},";
             sb.Append(prefix);
             sb.Append(text);
             foreach (var s in @params)
@@ -251,13 +262,14 @@ namespace TelloControl
             var msg = sb.ToString();
             //Log(msg, Console.ForegroundColor);
             console.AppendText(msg + Environment.NewLine);
-            await FileWriteAsync(msg);
+            await FileWriteAsync(filePath, msg);
+            console.ScrollToCaret();
             Task.Delay(100);
         }
 
-        public async Task FileWriteAsync(string messaage, bool append = true)
+        public async Task FileWriteAsync(string filePath, string messaage, bool append = true)
         {
-            using (FileStream stream = new FileStream(txtFilePath, append ? FileMode.Append : FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
+            using (FileStream stream = new FileStream(filePath, append ? FileMode.Append : FileMode.Create, FileAccess.Write, FileShare.None, 4096, true))
             {
                 using (StreamWriter sw = new StreamWriter(stream))
                 {
@@ -267,5 +279,30 @@ namespace TelloControl
         }
 
         #endregion
+
+        private void btnIncorrect_Click(object sender, EventArgs e)
+        {
+            Log(countersFilePath, $"Incorrect,{txtIncorrect.Text}");
+        }
+
+        private void btnCorrect_Click(object sender, EventArgs e)
+        {
+            Log(countersFilePath, $"Correct,");
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Voice_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtIncorrect_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
