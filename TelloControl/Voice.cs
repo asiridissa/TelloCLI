@@ -51,7 +51,7 @@ namespace TelloControl
 
         public async Task StartRecognition(string languageCode)
         {
-            console.AppendText($"{languageCode} Starting...\n");
+            AppendConsole($"{languageCode} Starting...");
             if (waveIn != null)
             {
                 // Stop current recording if any
@@ -91,7 +91,7 @@ namespace TelloControl
             };
 
             waveIn.StartRecording();
-            console.AppendText("Speak now...\n");
+            AppendConsole("Speak now...");
 
             var stopwatch = new Stopwatch();
             Task.Run(async () =>
@@ -106,12 +106,10 @@ namespace TelloControl
                         {
                             Invoke(new Action(() =>
                             {
-                                console.AppendText(Environment.NewLine);
-                                //console.AppendText($"Transcript: {alternative.Transcript}, Confidence: {alternative.Confidence}, Command : {TextCommandMapping.GetCommandClass(alternative.Transcript)}" + Environment.NewLine);
-                                Log(delaysFilePath, $"Text delay,{stopwatch.ElapsedTicks}"); // 1 tick = 100ns 
-                                console.ScrollToCaret();
+                                //AppendConsole($"Transcript: {alternative.Transcript}, Confidence: {alternative.Confidence}, Command : {TextCommandMapping.GetCommandClass(alternative.Transcript)}");
+                                Log(delaysFilePath, $"Text delay,{stopwatch.ElapsedTicks}", true); // 1 tick = 100ns 
                                 IssueVoiceCommand(alternative.Transcript);
-                                Log(delaysFilePath, $"Command delay,{stopwatch.ElapsedTicks}");
+                                Log(delaysFilePath, $"Command delay,{stopwatch.ElapsedTicks}", true);
                                 stopwatch.Reset();
                             }));
                         }
@@ -124,7 +122,9 @@ namespace TelloControl
         {
             try
             {
-                var records = TextCommandMapping.GetCommand(command);
+                var commandClass = TextCommandMapping.GetCommandClass(command);
+                var records = TextCommandMapping.GetCommand(commandClass);
+                AppendConsole($"{Environment.NewLine}\"{command}\" -> {commandClass}");
                 if (records.Count > 0)
                 {
                     var start = records.First().Time;
@@ -141,7 +141,7 @@ namespace TelloControl
                 }
                 else
                 {
-                    console.AppendText("??? Unidentified Command: " + command + Environment.NewLine);
+                    AppendConsole("??? Unidentified Command: " + command);
                     records.Add(new CommandData() { Time = 0, RCCommand = "rc 0 0 0 0", ticks = 0, delayFromPreviousMS = 0 });
                 }
 
@@ -150,7 +150,7 @@ namespace TelloControl
             }
             catch (Exception e)
             {
-                console.AppendText("!!! " + e + Environment.NewLine);
+                AppendConsole("!!! " + e);
             }
         }
 
@@ -166,23 +166,23 @@ namespace TelloControl
             {
                 await Task.Delay(command.delayFromPreviousMS ?? 0);
                 await udpClient.SendAsync(command.commandBytes, command.commandBytes.Length); // Send UDP packet
-                console.AppendText($"{command.delayFromPreviousMS} : {command.RCCommand}" + Environment.NewLine);
+                AppendConsole($"{command.delayFromPreviousMS} : {command.RCCommand}");
             }
 
             stopwatch.Stop();
-            Console.WriteLine("All commands executed.");
+            AppendConsole("All commands executed.");
         }
 
         private void btnTelemetry_Click(object sender, EventArgs e)
         {
             var x = Recording ? RecordStart() : RecordStop();
-            console.AppendText((TelloHelper.LoggingOn ? "Logging Started" : "Logging Finished") + Environment.NewLine);
+            AppendConsole((TelloHelper.LoggingOn ? "Logging Started" : "Logging Finished"));
             console.ScrollToCaret();
         }
 
         private void btnConnect_Click(object sender, EventArgs e)
         {
-            console.AppendText("Connecting..." + Environment.NewLine);
+            AppendConsole("Connecting...");
             IssueBtnCommandAndLog("command");
         }
 
@@ -237,7 +237,7 @@ namespace TelloControl
                 {
                     using (var logFile = new StreamWriter(filePath))
                     {
-                        console.AppendText("Writing start to file : " + filePath + Environment.NewLine);
+                        AppendConsole("Writing start to file : " + filePath);
                         logFile.WriteLine("Pilot,timestamp_ms,command,condition,pitch,roll,yaw,vgx,vgy,vgz,templ,temph,tof,h,bat,baro,time,agx,agy,agz");
                         var startTime = DateTime.Now;
 
@@ -254,7 +254,7 @@ namespace TelloControl
                             await logFile.WriteLineAsync(string.Join(",", txtPilot.Text, elapsedTime.ToString(), cmbCommand.Text, string.Join(",", csvLine)));
                         }
 
-                        console.AppendText("Writing complete to file : " + filePath + Environment.NewLine);
+                        AppendConsole("Writing complete to file : " + filePath);
                     }
                 }
             }
@@ -288,7 +288,20 @@ namespace TelloControl
 
         #region Logs
 
-        public async Task Log(string filePath, string text, params string[] @params)
+        private async Task AppendConsole(string text)
+        {
+            console.AppendText(text + Environment.NewLine);
+            console.ScrollToCaret();
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <param name="text"></param>
+        /// <param name="params">"send silent to not show on console"</param>
+        /// <returns></returns>
+        public async Task Log(string filePath, string text, bool? silent = false, params string[] @params)
         {
             var sb = new StringBuilder();
             var prefix = $"{DateTime.Now:HH:mm:ss.fff},";
@@ -301,9 +314,10 @@ namespace TelloControl
             //Console.ForegroundColor = text.Trim().Contains("Add") ? ConsoleColor.DarkGray : ConsoleColor.White;
             var msg = sb.ToString();
             //Log(msg, Console.ForegroundColor);
-            console.AppendText(msg + Environment.NewLine);
+            if (silent != true)
+                AppendConsole(msg);
+
             await FileWriteAsync(filePath, msg);
-            console.ScrollToCaret();
             Task.Delay(150);
         }
 
