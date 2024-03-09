@@ -1,5 +1,4 @@
-﻿Text,Category
-"Go up",GO UP 
+﻿"Go up",GO UP 
 "Fly up",GO UP 
 "Move up",GO UP 
 "Go up little",GO UP Little
@@ -191,3 +190,5 @@
 "Mayday",Emergency 
 "Mayday mayday",Emergency 
 "",Hover
+"Take off","takeoff"
+"Land","land"

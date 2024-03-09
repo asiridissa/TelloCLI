@@ -30,6 +30,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="CommandMapping.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Dictionary.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

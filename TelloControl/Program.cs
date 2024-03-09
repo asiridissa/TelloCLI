@@ -19,8 +19,8 @@ namespace TelloControl
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             //Application.Run(new Record());
-            Application.Run(new MainForm());
-            //Application.Run(new Voice());
+            //Application.Run(new MainForm());
+            Application.Run(new Voice());
         }
     }
 }

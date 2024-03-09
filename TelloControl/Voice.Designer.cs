@@ -39,7 +39,6 @@
             lblTemp = new Label();
             txtPilot = new TextBox();
             label2 = new Label();
-            txtCommand = new TextBox();
             label1 = new Label();
             btnEmergency = new Button();
             btnStop = new Button();
@@ -47,15 +46,13 @@
             chkRecordStart = new CheckBox();
             btnIncorrect = new Button();
             btnCorrect = new Button();
-            label3 = new Label();
-            label4 = new Label();
-            label5 = new Label();
-            txtIncorrect = new TextBox();
             label6 = new Label();
             groupBox1 = new GroupBox();
+            cmbAccuracyNote = new ComboBox();
             groupBox2 = new GroupBox();
+            cmbCommand = new ComboBox();
+            cmbCondition = new ComboBox();
             label7 = new Label();
-            textBox2 = new TextBox();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
@@ -159,7 +156,7 @@
             // 
             txtPilot.Location = new Point(84, 22);
             txtPilot.Name = "txtPilot";
-            txtPilot.Size = new Size(159, 23);
+            txtPilot.Size = new Size(168, 23);
             txtPilot.TabIndex = 35;
             txtPilot.Text = "Test User 1";
             // 
@@ -171,14 +168,6 @@
             label2.Size = new Size(30, 15);
             label2.TabIndex = 34;
             label2.Text = "User";
-            // 
-            // txtCommand
-            // 
-            txtCommand.Location = new Point(84, 51);
-            txtCommand.Name = "txtCommand";
-            txtCommand.Size = new Size(159, 23);
-            txtCommand.TabIndex = 33;
-            txtCommand.Text = "Left";
             // 
             // label1
             // 
@@ -195,7 +184,7 @@
             btnEmergency.ForeColor = Color.Red;
             btnEmergency.Location = new Point(739, 147);
             btnEmergency.Name = "btnEmergency";
-            btnEmergency.Size = new Size(75, 333);
+            btnEmergency.Size = new Size(102, 333);
             btnEmergency.TabIndex = 38;
             btnEmergency.Text = "Emergency Shut off !!!";
             btnEmergency.UseVisualStyleBackColor = false;
@@ -237,7 +226,7 @@
             // btnIncorrect
             // 
             btnIncorrect.BackColor = Color.FromArgb(255, 192, 192);
-            btnIncorrect.Location = new Point(15, 115);
+            btnIncorrect.Location = new Point(16, 71);
             btnIncorrect.Name = "btnIncorrect";
             btnIncorrect.Size = new Size(113, 53);
             btnIncorrect.TabIndex = 40;
@@ -248,7 +237,7 @@
             // btnCorrect
             // 
             btnCorrect.BackColor = Color.FromArgb(192, 255, 192);
-            btnCorrect.Location = new Point(136, 117);
+            btnCorrect.Location = new Point(137, 73);
             btnCorrect.Name = "btnCorrect";
             btnCorrect.Size = new Size(107, 51);
             btnCorrect.TabIndex = 41;
@@ -256,47 +245,10 @@
             btnCorrect.UseVisualStyleBackColor = false;
             btnCorrect.Click += btnCorrect_Click;
             // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(15, 38);
-            label3.Name = "label3";
-            label3.Size = new Size(100, 15);
-            label3.TabIndex = 42;
-            label3.Text = "Accuracy counter";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.ForeColor = Color.Green;
-            label4.Location = new Point(121, 38);
-            label4.Name = "label4";
-            label4.Size = new Size(52, 15);
-            label4.TabIndex = 43;
-            label4.Text = "Correct: ";
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.ForeColor = Color.Red;
-            label5.Location = new Point(121, 58);
-            label5.Name = "label5";
-            label5.Size = new Size(60, 15);
-            label5.TabIndex = 44;
-            label5.Text = "Incorrect: ";
-            // 
-            // txtIncorrect
-            // 
-            txtIncorrect.Location = new Point(15, 86);
-            txtIncorrect.Name = "txtIncorrect";
-            txtIncorrect.Size = new Size(228, 23);
-            txtIncorrect.TabIndex = 45;
-            txtIncorrect.TextChanged += txtIncorrect_TextChanged;
-            // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(15, 68);
+            label6.Location = new Point(16, 24);
             label6.Name = "label6";
             label6.Size = new Size(67, 15);
             label6.TabIndex = 46;
@@ -304,38 +256,65 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(cmbAccuracyNote);
             groupBox1.Controls.Add(btnIncorrect);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(btnCorrect);
-            groupBox1.Controls.Add(txtIncorrect);
-            groupBox1.Controls.Add(label3);
-            groupBox1.Controls.Add(label5);
-            groupBox1.Controls.Add(label4);
             groupBox1.Location = new Point(862, 20);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(262, 185);
+            groupBox1.Size = new Size(262, 135);
             groupBox1.TabIndex = 47;
             groupBox1.TabStop = false;
             groupBox1.Text = "Accuracy";
-            groupBox1.Enter += groupBox1_Enter;
+            // 
+            // cmbAccuracyNote
+            // 
+            cmbAccuracyNote.FormattingEnabled = true;
+            cmbAccuracyNote.Items.AddRange(new object[] { "Speech to text no result", "Speech to text partial  result", "Speech to text previous voice input partially used", "Speech to text invalid result", "Drone behaviour mismatch the command" });
+            cmbAccuracyNote.Location = new Point(15, 45);
+            cmbAccuracyNote.Name = "cmbAccuracyNote";
+            cmbAccuracyNote.Size = new Size(229, 23);
+            cmbAccuracyNote.TabIndex = 47;
+            cmbAccuracyNote.Tag = "invalid";
+            cmbAccuracyNote.Text = "Speech to text invalid result";
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(textBox2);
+            groupBox2.Controls.Add(cmbCommand);
+            groupBox2.Controls.Add(cmbCondition);
             groupBox2.Controls.Add(label7);
             groupBox2.Controls.Add(txtPilot);
             groupBox2.Controls.Add(btnRecord);
             groupBox2.Controls.Add(btnStop);
             groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(chkRecordStart);
-            groupBox2.Controls.Add(txtCommand);
             groupBox2.Controls.Add(label2);
-            groupBox2.Location = new Point(862, 211);
+            groupBox2.Location = new Point(862, 170);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(262, 269);
             groupBox2.TabIndex = 48;
             groupBox2.TabStop = false;
             groupBox2.Text = "Log Recording";
+            // 
+            // cmbCommand
+            // 
+            cmbCommand.FormattingEnabled = true;
+            cmbCommand.Items.AddRange(new object[] { "GO UP ", "GO UP Little", "GO UP Lot", "GO Down ", "GO Down Little", "GO Down Lot", "GO Left ", "GO Left Little", "GO Left Lot", "GO Right ", "GO Right Little", "GO Right Lot", "GO Forward ", "GO Forward Little", "GO Forward Lot", "GO Back ", "GO Back Little", "GO Back Lot", "Turn Left ", "Turn Left Little", "Turn Left Lot", "Turn Right ", "Turn Right Little", "Turn Right Lot", "Hover  ", "Emergency  ", "Takeoff  ", "Land  ", "Connect " });
+            cmbCommand.Location = new Point(84, 51);
+            cmbCommand.Name = "cmbCommand";
+            cmbCommand.Size = new Size(168, 23);
+            cmbCommand.TabIndex = 49;
+            cmbCommand.Text = "Connect ";
+            // 
+            // cmbCondition
+            // 
+            cmbCondition.FormattingEnabled = true;
+            cmbCondition.Items.AddRange(new object[] { "Normal", "Noisy", "Low Light", "Windy" });
+            cmbCondition.Location = new Point(15, 105);
+            cmbCondition.Name = "cmbCondition";
+            cmbCondition.Size = new Size(237, 23);
+            cmbCondition.TabIndex = 49;
+            cmbCondition.Text = "Normal";
             // 
             // label7
             // 
@@ -345,14 +324,6 @@
             label7.Size = new Size(103, 15);
             label7.TabIndex = 41;
             label7.Text = "Control Condition";
-            // 
-            // textBox2
-            // 
-            textBox2.Location = new Point(15, 105);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(228, 23);
-            textBox2.TabIndex = 42;
-            textBox2.Text = "Normal";
             // 
             // Voice
             // 
@@ -373,7 +344,6 @@
             Controls.Add(console);
             Name = "Voice";
             Text = "Voice";
-            Load += Voice_Load;
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -395,7 +365,6 @@
         private Label lblTemp;
         private TextBox txtPilot;
         private Label label2;
-        private TextBox txtCommand;
         private Label label1;
         private Button btnEmergency;
         private Button btnStop;
@@ -403,14 +372,12 @@
         private CheckBox chkRecordStart;
         private Button btnIncorrect;
         private Button btnCorrect;
-        private Label label3;
-        private Label label4;
-        private Label label5;
-        private TextBox txtIncorrect;
         private Label label6;
         private GroupBox groupBox1;
         private GroupBox groupBox2;
-        private TextBox textBox2;
         private Label label7;
+        private ComboBox cmbCondition;
+        private ComboBox cmbCommand;
+        private ComboBox cmbAccuracyNote;
     }
 }

@@ -1,0 +1,240 @@
+﻿VoiceCommand,Time,RCCommand
+"hover",0,rc 0 0 0 0
+"emergency",0,emergency
+"takeoff",0,takeoff
+"land",0,land
+"go up",0,rc 0 0 0 0
+"go up",93.9996913075447,rc 0 0 0 11
+"go up",194.999948143959,rc 0 0 0 62
+"go up",295.999576337635,rc 0 0 0 97
+"go up",395.999662578105,rc 0 0 0 99
+"go up",495.999748818576,rc 0 0 0 0
+"go up little",0,rc 0 0 0 0
+"go up little",101.99979878962,rc 0 0 0 66
+"go up little",189.999723806977,rc 0 0 0 99
+"go up little",289.999810047447,rc 0 0 0 99
+"go up little",325.99966507405,rc 0 0 0 0
+"go up lot",0,rc 0 0 0 
+"go up lot",95.0004905462265,rc 0 0 0 7
+"go up lot",194.999948143959,rc 0 0 0 80
+"go up lot",296.000204980373,rc 0 0 0 99
+"go up lot",396.000291220843,rc 0 0 0 99
+"go up lot",496.000377461314,rc 0 0 0 99
+"go up lot",597.00000565499,rc 0 0 0 99
+"go up lot",697.000091895461,rc 0 0 0 99
+"go up lot",797.000178135931,rc 0 0 0 99
+"go up lot",897.000264376401,rc 0 0 0 99
+"go up lot",997.999892570078,rc 0 0 0 99
+"go up lot",1097.99997881054,rc 0 0 0 99
+"go up lot",1198.00006505101,rc 0 0 0 99
+"go up lot",1298.00015129148,rc 0 0 0 99
+"go up lot",1334.00000631809,rc 0 0 0 0
+"go down",0,rc 0 0 0 0
+"go down",87.9999250173568,rc 0 0 0 -92
+"go down",189.000181853771,rc 0 0 0 -100
+"go down",289.000268094241,rc 0 0 0 -100
+"go down",389.000354334712,rc 0 0 0 -100
+"go down",440.000253729522,rc 0 0 0 0
+"go down little",0,rc 0 0 0 0
+"go down little",87.9999250173568,rc 0 0 0 -32
+"go down little",189.000181853771,rc 0 0 0 -100
+"go down little",282.999873161315,rc 0 0 0 0
+"go down lot",0,rc 0 0 0 0
+"go down lot",93.0001493543386,rc 0 0 0 -52
+"go down lot",193.999777548015,rc 0 0 0 -100
+"go down lot",293.999863788485,rc 0 0 0 -100
+"go down lot",393.999950028955,rc 0 0 0 -100
+"go down lot",494.000036269426,rc 0 0 0 -100
+"go down lot",595.00029310584,rc 0 0 0 -100
+"go down lot",694.999750703573,rc 0 0 0 -100
+"go down lot",794.999836944043,rc 0 0 0 -100
+"go down lot",894.999923184514,rc 0 0 0 -100
+"go down lot",996.000180020928,rc 0 0 0 -100
+"go down lot",1096.00026626139,rc 0 0 0 -100
+"go down lot",1195.99972385913,rc 0 0 0 -100
+"go down lot",1250.00013504177,rc 0 0 0 0
+"go left",0,rc 0 0 0 0
+"go left",93.9996913,rc 0 -28 0 0
+"go left",194.9999481,rc 0 -91 0 0
+"go left",295.0000344,rc 0 -99 0 0
+"go left",395.9996626,rc 0 -99 0 0
+"go left",495.9997488,rc 0 -99 0 0
+"go left",595.9998351,rc 0 -99 0 0
+"go left",706.9999119,rc 0 -99 0 0
+"go left",796.9995495,rc 0 -99 0 0
+"go left",896.9996357,rc 0 -99 0 0
+"go left",996.999722,rc 0 -99 0 0
+"go left",1076.9995395,rc 0 0 0 0
+"go left",1351.9999338,rc 0 -31 0 0
+"go left",1353.9996464,rc 0 0 0 0
+"go left little",0,rc 0 0 0 0
+"go left little",98.9999156,rc 0 -37 0 0
+"go left little",201.0003431,rc 0 -98 0 0
+"go left little",300.9998007,rc 0 -99 0 0
+"go left little",321.0000694,rc 0 0 0 0
+"go left little",1946.0000563,rc 0 29 0 0
+"go left little",1959.9999301,rc 0 0 0 0
+"go left lot",0,rc 0 0 0 0
+"go left lot",91.9999788,rc 0 -54 0 0
+"go left lot",192.000065,rc 0 -99 0 0
+"go left lot",292.9996932,rc 0 -99 0 0
+"go left lot",374.9998519,rc 0 0 0 0
+"go left lot",4206.9997871,rc 0 -58 0 0
+"go left lot",4207.9999577,rc 0 0 0 0
+"go right",0,rc 0 0 0 0
+"go right",89.9996375665068,rc 0 5 0 0
+"go right",190.999894402921,rc 0 42 0 0
+"go right",291.999522596597,rc 0 68 0 0
+"go right",391.999608837068,rc 0 74 0 0
+"go right",490.999524481594,rc 0 75 0 0
+"go right",591.999781318008,rc 0 75 0 0
+"go right",691.999867558479,rc 0 74 0 0
+"go right",791.999953798949,rc 0 73 0 0
+"go right",892.999581992626,rc 0 73 0 0
+"go right",925.000011920929,rc 0 0 0 0
+"go right",1493.99964138865,rc 0 -28 0 0
+"go right",1504.00009006261,rc 0 0 0 0
+"go right little",0,rc 0 0 0 0
+"go right little",197.000289335846,rc 0 85 0 0
+"go right little",297.000375576317,rc 0 77 0 0
+"go right little",374.000309966504,rc 0 0 0 0
+"go right little",1815.9998813644,rc 0 -8 0 0
+"go right little",1822.00027629733,rc 0 0 0 0
+"go right lot",0,rc 0 0 0 0
+"go right lot",95.0004905462265,rc 0 43 0 0
+"go right lot",196.000118739902,rc 0 100 0 0
+"go right lot",296.000204980373,rc 0 100 0 0
+"go right lot",396.000291220843,rc 0 100 0 0
+"go right lot",496.000377461314,rc 0 100 0 0
+"go right lot",597.00000565499,rc 0 100 0 0
+"go right lot",697.000091895461,rc 0 100 0 0
+"go right lot",797.000178135931,rc 0 100 0 0
+"go right lot",897.000264376401,rc 0 100 0 0
+"go right lot",997.999892570078,rc 0 100 0 0
+"go right lot",1008.99988319724,rc 0 0 0 0
+"go right lot",1244.99991070479,rc 0 17 0 0
+"go right lot",1254.00018878281,rc 0 0 0 0
+"go forward",0,rc 0 0 0 0
+"go forward",100.00008624047,rc 14 0 0 0
+"go forward",201.000343076884,rc 73 0 0 0
+"go forward",301.000429317355,rc 90 0 0 0
+"go forward",400.999886915087,rc 91 0 0 0
+"go forward",444.00030747056,rc 0 0 0 0
+"go forward little",0,rc 0 0 0 0
+"go forward little",1078.00033874809,rc 0 0 0 0
+"go forward little",93.9996913075447,rc 12 0 0 0
+"go forward little",194.999948143959,rc 84 0 0 0
+"go forward little",256.999838165938,rc 0 0 0 0
+"go forward lot",0,rc 0 0 0 0
+"go forward lot",93.0001493543386,rc 22 0 0 0
+"go forward lot",193.999777548015,rc 82 0 0 0
+"go forward lot",293.999863788485,rc 99 0 0 0
+"go forward lot",395.000120624899,rc 99 0 0 0
+"go forward lot",494.999578222632,rc 98 0 0 0
+"go forward lot",602.999771945178,rc 98 0 0 0
+"go forward lot",694.999750703573,rc 98 0 0 0
+"go forward lot",794.999836944043,rc 97 0 0 0
+"go forward lot",905.999913811683,rc 97 0 0 0
+"go forward lot",995.99955137819,rc 97 0 0 0
+"go forward lot",1106.99962824583,rc 97 0 0 0
+"go forward lot",1194.99955326318,rc 97 0 0 0
+"go forward lot",1295.9998100996,rc 97 0 0 0
+"go forward lot",1316.00007880479,rc 0 0 0 0
+"go back",0,rc 0 0 0 0
+"go back",87.9999250173568,rc -20 0 0 0
+"go back",188.999553211033,rc -99 0 0 0
+"go back",288.999639451503,rc -99 0 0 0
+"go back",388.999725691974,rc -99 0 0 0
+"go back",490.999524481594,rc -99 0 0 0
+"go back",590.000068768858,rc 72 0 0 0
+"go back",689.999526366591,rc 99 0 0 0
+"go back",715.999561361968,rc 0 0 0 0
+"go back little",0,rc 0 0 0 0
+"go back little",100.00008624047,rc -45 0 0 0
+"go back little",200.00017248094,rc -100 0 0 0
+"go back little",300.000258721411,rc -100 0 0 0
+"go back little",340.999709442257,rc 0 0 0 0
+"go back lot",0,rc 0 0 0 0
+"go back lot",587.000185623765,rc -100 0 0 0
+"go back lot",687.000271864235,rc -100 0 0 0
+"go back lot",787.000358104705,rc -100 0 0 0
+"go back lot",886.999815702438,rc -100 0 0 0
+"go back lot",988.000072538852,rc -100 0 0 0
+"go back lot",1088.00015877932,rc -100 0 0 0
+"go back lot",1188.00024501979,rc -100 0 0 0
+"go back lot",1284.00027751922,rc 0 0 0 0
+"go clockwise",0,rc 0 0 0 0
+"go clockwise",868.00034623593,rc 0 0 0 0
+"go clockwise",93.9996913075447,rc 0 0 43 0
+"go clockwise",194.999948143959,rc 0 0 100 0
+"go clockwise",295.000034384429,rc 0 0 100 0
+"go clockwise",395.000120624899,rc 0 0 100 0
+"go clockwise",495.999748818576,rc 0 0 100 0
+"go clockwise",583.000131882727,rc 0 0 0 0
+"go clockwise little",0,rc 0 0 0 0
+"go clockwise little",1504.00009006261,rc 0 0 0 0
+"go clockwise little",89.0000956133008,rc 0 0 40 0
+"go clockwise little",190.000352449715,rc 0 0 100 0
+"go clockwise little",290.000438690185,rc 0 0 100 0
+"go clockwise little",338.999996893107,rc 0 0 0 0
+"go clockwise little",0,rc 0 0 0 0
+"go clockwise lot",0,rc 0 0 0 0
+"go clockwise lot",12.0001612231135,rc 0 0 1 0
+"go clockwise lot",100.999628193676,rc 0 0 42 0
+"go clockwise lot",201.99988503009,rc 0 0 100 0
+"go clockwise lot",301.999971270561,rc 0 0 100 0
+"go clockwise lot",402.000057511031,rc 0 0 100 0
+"go clockwise lot",502.000143751502,rc 0 0 100 0
+"go clockwise lot",601.999601349234,rc 0 0 100 0
+"go clockwise lot",702.999858185648,rc 0 0 100 0
+"go clockwise lot",802.999944426119,rc 0 0 100 0
+"go clockwise lot",903.000030666589,rc 0 0 100 0
+"go clockwise lot",1003.00011690706,rc 0 0 100 0
+"go clockwise lot",1103.99974510073,rc 0 0 100 0
+"go clockwise lot",1202.99966074526,rc 0 0 100 0
+"go clockwise lot",1303.99991758167,rc 0 0 100 0
+"go clockwise lot",1404.00000382214,rc 0 0 100 0
+"go clockwise lot",1502.99991946667,rc 0 0 100 0
+"go clockwise lot",1604.99971825629,rc 0 0 100 0
+"go clockwise lot",1703.99963390082,rc 0 0 100 0
+"go clockwise lot",1804.99989073723,rc 0 0 100 0
+"go clockwise lot",1836.9996920228,rc 0 0 0 0
+"go counter clockwise",0,rc 0 0 0 0
+"go counter clockwise",7632.99961108714,rc 0 0 0 0
+"go counter clockwise",93.0001493543386,rc 0 0 -44 0
+"go counter clockwise",193.000235594809,rc 0 0 -95 0
+"go counter clockwise",293.999863788485,rc 0 0 -99 0
+"go counter clockwise",393.999950028955,rc 0 0 -99 0
+"go counter clockwise",494.000036269426,rc 0 0 -99 0
+"go counter clockwise",595.00029310584,rc 0 0 -99 0
+"go counter clockwise",623.000040650367,rc 0 0 0 0
+"go counter clockwise little",0,rc 0 0 0 0
+"go counter clockwise little",13.0003318190574,rc 0 0 -1 0
+"go counter clockwise little",100.00008624047,rc 0 0 -60 0
+"go counter clockwise little",201.000343076884,rc 0 0 -99 0
+"go counter clockwise little",236.000027507543,rc 0 0 0 0
+"go counter clockwise lot",0,rc 0 0 0 0
+"go counter clockwise lot",100.00008624047,rc 0 0 -51 0
+"go counter clockwise lot",201.000343076884,rc 0 0 -97 0
+"go counter clockwise lot",300.000258721411,rc 0 0 -99 0
+"go counter clockwise lot",400.999886915087,rc 0 0 -99 0
+"go counter clockwise lot",502.000143751502,rc 0 0 -99 0
+"go counter clockwise lot",601.000059396028,rc 0 0 -99 0
+"go counter clockwise lot",702.000316232442,rc 0 0 -99 0
+"go counter clockwise lot",801.999773830175,rc 0 0 -99 0
+"go counter clockwise lot",903.000030666589,rc 0 0 -99 0
+"go counter clockwise lot",1001.99994631111,rc 0 0 -99 0
+"go counter clockwise lot",1103.00020314753,rc 0 0 -99 0
+"go counter clockwise lot",1202.00011879205,rc 0 0 -99 0
+"go counter clockwise lot",1302.00020503252,rc 0 0 -99 0
+"go counter clockwise lot",1404.00000382214,rc 0 0 -99 0
+"go counter clockwise lot",1502.99991946667,rc 0 0 -99 0
+"go counter clockwise lot",1604.00017630308,rc 0 0 -99 0
+"go counter clockwise lot",1703.00009194761,rc 0 0 -99 0
+"go counter clockwise lot",1804.00034878402,rc 0 0 -99 0
+"go counter clockwise lot",1903.99980638176,rc 0 0 -99 0
+"go counter clockwise lot",2003.00035066902,rc 0 0 -99 0
+"go counter clockwise lot",2103.9999788627,rc 0 0 -99 0
+"go counter clockwise lot",2204.00006510317,rc 0 0 -99 0
+"go counter clockwise lot",2304.00015134364,rc 0 0 -99 0
+"go counter clockwise lot",2308.99974703788,rc 0 0 0 0

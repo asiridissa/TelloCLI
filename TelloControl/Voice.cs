@@ -23,10 +23,11 @@ namespace TelloControl
         string droneIP = "192.168.10.1"; // Tello IP
         int commandPort = 8889; // Command port
         int telemetryPort = 8890; // Telemetry data port
-
+        private static UdpClient commandClient = new UdpClient();
         public Voice()
         {
             InitializeComponent();
+
             // Path to your Google Cloud service account key file
             string credentialPath = "msc2024-411517-71868ce380c1.json";
 
@@ -34,6 +35,8 @@ namespace TelloControl
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", credentialPath);
             speechClient = SpeechClient.Create();
             Task.Run(TelloHelper.RecordFlightLogAsync);
+
+            commandClient.Connect(droneIP, commandPort);
         }
 
         private async void siLK_Click(object sender, EventArgs e)
@@ -103,7 +106,8 @@ namespace TelloControl
                         {
                             Invoke(new Action(() =>
                             {
-                                console.AppendText($"Transcript: {alternative.Transcript}, Confidence: {alternative.Confidence}, Command : {TextCommandMapping.GetCommandClass(alternative.Transcript)}" + Environment.NewLine);
+                                console.AppendText(Environment.NewLine);
+                                //console.AppendText($"Transcript: {alternative.Transcript}, Confidence: {alternative.Confidence}, Command : {TextCommandMapping.GetCommandClass(alternative.Transcript)}" + Environment.NewLine);
                                 Log(delaysFilePath, $"Text delay,{stopwatch.ElapsedTicks}"); // 1 tick = 100ns 
                                 console.ScrollToCaret();
                                 IssueVoiceCommand(alternative.Transcript);
@@ -116,18 +120,57 @@ namespace TelloControl
             });
         }
 
-        void IssueVoiceCommand(string command)
+        private async Task IssueVoiceCommand(string command)
         {
-            var dic = new Dictionary<string, string>
+            try
             {
-                { "connect", "command" },
-                { "take off", "takeoff" },
-            };
+                var records = TextCommandMapping.GetCommand(command);
+                if (records.Count > 0)
+                {
+                    var start = records.First().Time;
 
-            //List<(TimeSpan, string)> commands = TextCommandMapping.GetCommand(command);
+                    records = records.Select(x =>
+                    {
+                        var span = x.Time - start;
+                        x.ticks = Convert.ToInt64(span);
+                        x.delayFromPreviousMS = x.Time == 0
+                            ? 0
+                            : (int)((x.Time - records.Where(z => z.Time < x.Time)?.Max(z => z.Time)) ?? 0);
+                        return x;
+                    }).ToList();
+                }
+                else
+                {
+                    console.AppendText("??? Unidentified Command: " + command + Environment.NewLine);
+                    records.Add(new CommandData() { Time = 0, RCCommand = "rc 0 0 0 0", ticks = 0, delayFromPreviousMS = 0 });
+                }
 
-            //KeyValuePair<string, string>? val = dic.FirstOrDefault(x => x.Key == command.Trim());
-            //_ = IssueBtnCommandAndLog(val.Value.Key?.Length > 0 ? val.Value.Value.ToLower() : command.Trim().ToLower());
+                await DelayExecution(records, commandClient);
+
+            }
+            catch (Exception e)
+            {
+                console.AppendText("!!! " + e + Environment.NewLine);
+            }
+        }
+
+        private async Task DelayExecution(List<CommandData> data, UdpClient udpClient)
+        {
+            List<ScheduledCommand> commands = data.Select(x => new ScheduledCommand(x.RCCommand, x.delayFromPreviousMS ?? 0)).ToList();
+
+            Stopwatch stopwatch = Stopwatch.StartNew();
+
+            List<Task> tasks = new List<Task>();
+
+            foreach (var command in data)
+            {
+                await Task.Delay(command.delayFromPreviousMS ?? 0);
+                await udpClient.SendAsync(command.commandBytes, command.commandBytes.Length); // Send UDP packet
+                console.AppendText($"{command.delayFromPreviousMS} : {command.RCCommand}" + Environment.NewLine);
+            }
+
+            stopwatch.Stop();
+            Console.WriteLine("All commands executed.");
         }
 
         private void btnTelemetry_Click(object sender, EventArgs e)
@@ -154,13 +197,10 @@ namespace TelloControl
 
         private async Task IssueBtnCommandAndLog(string command)
         {
-            txtCommand.Text = command;
+            cmbCommand.Text = command;
             if (chkRecordStart.Checked) RecordStart();
-            using (var commandClient = new UdpClient())
-            {
-                commandClient.Connect(droneIP, commandPort);
-                await SendCommandAsync(command, commandClient);
-            }
+            commandClient.Connect(droneIP, commandPort);
+            await SendCommandAsync(command, commandClient);
         }
 
         private void btnRecord_Click(object sender, EventArgs e)
@@ -181,8 +221,8 @@ namespace TelloControl
         private async Task RecordStart()
         {
             timestamp = DateTime.Now.ToString("MMdd_HHmmss");
-            csvFilePath = Path.Combine(baseFolder, $"{txtPilot.Text}_{timestamp}_{txtCommand.Text}.csv");
-            txtFilePath = Path.Combine(baseFolder, $"{txtPilot.Text}_{timestamp}_{txtCommand.Text}.txt");
+            csvFilePath = Path.Combine(baseFolder, $"{txtPilot.Text}_{timestamp}_{cmbCommand.Text}.csv");
+            txtFilePath = Path.Combine(baseFolder, $"{txtPilot.Text}_{timestamp}_{cmbCommand.Text}.txt");
             Recording = true;
             await RecordFlightLogAsync(telemetryPort, csvFilePath);
         }
@@ -211,7 +251,7 @@ namespace TelloControl
                             lblBattery.Text = $"{csvLine[10]} %";
                             lblH.Text = $"{csvLine[9]} h";
                             lblTime.Text = $"{csvLine[12]} t";
-                            await logFile.WriteLineAsync(string.Join(",", txtPilot.Text, elapsedTime.ToString(), txtCommand.Text, string.Join(",", csvLine)));
+                            await logFile.WriteLineAsync(string.Join(",", txtPilot.Text, elapsedTime.ToString(), cmbCommand.Text, string.Join(",", csvLine)));
                         }
 
                         console.AppendText("Writing complete to file : " + filePath + Environment.NewLine);
@@ -251,7 +291,7 @@ namespace TelloControl
         public async Task Log(string filePath, string text, params string[] @params)
         {
             var sb = new StringBuilder();
-            var prefix = $"{DateTime.Now:yy/MM/dd HH:mm:ss.fff},";
+            var prefix = $"{DateTime.Now:HH:mm:ss.fff},";
             sb.Append(prefix);
             sb.Append(text);
             foreach (var s in @params)
@@ -264,7 +304,7 @@ namespace TelloControl
             console.AppendText(msg + Environment.NewLine);
             await FileWriteAsync(filePath, msg);
             console.ScrollToCaret();
-            Task.Delay(100);
+            Task.Delay(150);
         }
 
         public async Task FileWriteAsync(string filePath, string messaage, bool append = true)
@@ -282,27 +322,12 @@ namespace TelloControl
 
         private void btnIncorrect_Click(object sender, EventArgs e)
         {
-            Log(countersFilePath, $"Incorrect,{txtIncorrect.Text}");
+            Log(countersFilePath, $"Incorrect,{cmbAccuracyNote.Text}");
         }
 
         private void btnCorrect_Click(object sender, EventArgs e)
         {
             Log(countersFilePath, $"Correct,");
-        }
-
-        private void groupBox1_Enter(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Voice_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtIncorrect_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }
