@@ -124,11 +124,13 @@ namespace TelloControl
         {
             try
             {
+                if (chkRecordStart.Checked) RecordStart();
+                
                 var commandClass = TextCommandMapping.GetCommandClass(command);
                 if (commandClass!= "-")
-                {
                     cmbCommand.Text = commandClass;
-                }
+                else
+                    cmbCommand.Text = "Unidentified Command";
 
                 var records = TextCommandMapping.GetCommand(commandClass);
                 AppendConsole($"{Environment.NewLine}\"{command}\" -> {commandClass}");

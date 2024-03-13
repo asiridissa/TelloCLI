@@ -221,6 +221,8 @@
             // chkRecordStart
             // 
             chkRecordStart.AutoSize = true;
+            chkRecordStart.Checked = true;
+            chkRecordStart.CheckState = CheckState.Checked;
             chkRecordStart.Location = new Point(15, 134);
             chkRecordStart.Name = "chkRecordStart";
             chkRecordStart.Size = new Size(218, 19);
