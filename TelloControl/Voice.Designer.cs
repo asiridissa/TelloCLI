@@ -48,16 +48,16 @@
             btnCorrect = new Button();
             label6 = new Label();
             groupBox1 = new GroupBox();
+            btnIncorrect5 = new Button();
+            btnIncorrect4 = new Button();
+            btnIncorrect3 = new Button();
+            btnIncorrect2 = new Button();
             btnIncorrect1 = new Button();
             cmbAccuracyNote = new ComboBox();
             groupBox2 = new GroupBox();
             cmbCommand = new ComboBox();
             cmbCondition = new ComboBox();
             label7 = new Label();
-            btnIncorrect2 = new Button();
-            btnIncorrect3 = new Button();
-            btnIncorrect4 = new Button();
-            btnIncorrect5 = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
@@ -70,7 +70,7 @@
             console.Location = new Point(134, 2);
             console.Name = "console";
             console.ReadOnly = true;
-            console.Size = new Size(586, 478);
+            console.Size = new Size(586, 665);
             console.TabIndex = 0;
             console.TabStop = false;
             console.Text = "";
@@ -186,10 +186,11 @@
             // btnEmergency
             // 
             btnEmergency.BackColor = SystemColors.Info;
+            btnEmergency.Font = new Font("Segoe UI", 11F, FontStyle.Bold);
             btnEmergency.ForeColor = Color.Red;
             btnEmergency.Location = new Point(739, 147);
             btnEmergency.Name = "btnEmergency";
-            btnEmergency.Size = new Size(102, 333);
+            btnEmergency.Size = new Size(102, 520);
             btnEmergency.TabIndex = 38;
             btnEmergency.Text = "Emergency Shut off !!!";
             btnEmergency.UseVisualStyleBackColor = false;
@@ -277,6 +278,51 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Accuracy";
             // 
+            // btnIncorrect5
+            // 
+            btnIncorrect5.BackColor = Color.FromArgb(255, 192, 192);
+            btnIncorrect5.Location = new Point(6, 297);
+            btnIncorrect5.Name = "btnIncorrect5";
+            btnIncorrect5.Size = new Size(250, 37);
+            btnIncorrect5.TabIndex = 53;
+            btnIncorrect5.Text = "Drone behaviour mismatch the command";
+            btnIncorrect5.UseVisualStyleBackColor = false;
+            btnIncorrect5.Click += btnIncorrectQuick_Click;
+            // 
+            // btnIncorrect4
+            // 
+            btnIncorrect4.BackColor = Color.FromArgb(255, 192, 192);
+            btnIncorrect4.Location = new Point(6, 257);
+            btnIncorrect4.Name = "btnIncorrect4";
+            btnIncorrect4.Size = new Size(250, 37);
+            btnIncorrect4.TabIndex = 51;
+            btnIncorrect4.Text = "Speech to text invalid result";
+            btnIncorrect4.UseVisualStyleBackColor = false;
+            btnIncorrect4.Click += btnIncorrectQuick_Click;
+            // 
+            // btnIncorrect3
+            // 
+            btnIncorrect3.BackColor = Color.FromArgb(255, 192, 192);
+            btnIncorrect3.Location = new Point(6, 216);
+            btnIncorrect3.Name = "btnIncorrect3";
+            btnIncorrect3.Size = new Size(250, 37);
+            btnIncorrect3.TabIndex = 50;
+            btnIncorrect3.Text = "Speech to text previous voice input partially used";
+            btnIncorrect3.UseCompatibleTextRendering = true;
+            btnIncorrect3.UseVisualStyleBackColor = false;
+            btnIncorrect3.Click += btnIncorrectQuick_Click;
+            // 
+            // btnIncorrect2
+            // 
+            btnIncorrect2.BackColor = Color.FromArgb(255, 192, 192);
+            btnIncorrect2.Location = new Point(6, 175);
+            btnIncorrect2.Name = "btnIncorrect2";
+            btnIncorrect2.Size = new Size(250, 37);
+            btnIncorrect2.TabIndex = 49;
+            btnIncorrect2.Text = "Speech to text partial  result";
+            btnIncorrect2.UseVisualStyleBackColor = false;
+            btnIncorrect2.Click += btnIncorrectQuick_Click;
+            // 
             // btnIncorrect1
             // 
             btnIncorrect1.BackColor = Color.FromArgb(255, 192, 192);
@@ -345,51 +391,6 @@
             label7.Size = new Size(103, 15);
             label7.TabIndex = 41;
             label7.Text = "Control Condition";
-            // 
-            // btnIncorrect2
-            // 
-            btnIncorrect2.BackColor = Color.FromArgb(255, 192, 192);
-            btnIncorrect2.Location = new Point(6, 175);
-            btnIncorrect2.Name = "btnIncorrect2";
-            btnIncorrect2.Size = new Size(250, 37);
-            btnIncorrect2.TabIndex = 49;
-            btnIncorrect2.Text = "Speech to text partial  result";
-            btnIncorrect2.UseVisualStyleBackColor = false;
-            btnIncorrect2.Click += btnIncorrectQuick_Click;
-            // 
-            // btnIncorrect3
-            // 
-            btnIncorrect3.BackColor = Color.FromArgb(255, 192, 192);
-            btnIncorrect3.Location = new Point(6, 216);
-            btnIncorrect3.Name = "btnIncorrect3";
-            btnIncorrect3.Size = new Size(250, 37);
-            btnIncorrect3.TabIndex = 50;
-            btnIncorrect3.Text = "Speech to text previous voice input partially used";
-            btnIncorrect3.UseCompatibleTextRendering = true;
-            btnIncorrect3.UseVisualStyleBackColor = false;
-            btnIncorrect3.Click += btnIncorrectQuick_Click;
-            // 
-            // btnIncorrect4
-            // 
-            btnIncorrect4.BackColor = Color.FromArgb(255, 192, 192);
-            btnIncorrect4.Location = new Point(6, 257);
-            btnIncorrect4.Name = "btnIncorrect4";
-            btnIncorrect4.Size = new Size(250, 37);
-            btnIncorrect4.TabIndex = 51;
-            btnIncorrect4.Text = "Speech to text invalid result";
-            btnIncorrect4.UseVisualStyleBackColor = false;
-            btnIncorrect4.Click += btnIncorrectQuick_Click;
-            // 
-            // btnIncorrect5
-            // 
-            btnIncorrect5.BackColor = Color.FromArgb(255, 192, 192);
-            btnIncorrect5.Location = new Point(6, 297);
-            btnIncorrect5.Name = "btnIncorrect5";
-            btnIncorrect5.Size = new Size(250, 37);
-            btnIncorrect5.TabIndex = 53;
-            btnIncorrect5.Text = "Drone behaviour mismatch the command";
-            btnIncorrect5.UseVisualStyleBackColor = false;
-            btnIncorrect5.Click += btnIncorrectQuick_Click;
             // 
             // Voice
             // 

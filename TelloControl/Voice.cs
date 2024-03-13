@@ -125,6 +125,11 @@ namespace TelloControl
             try
             {
                 var commandClass = TextCommandMapping.GetCommandClass(command);
+                if (commandClass!= "-")
+                {
+                    cmbCommand.Text = commandClass;
+                }
+
                 var records = TextCommandMapping.GetCommand(commandClass);
                 AppendConsole($"{Environment.NewLine}\"{command}\" -> {commandClass}");
                 if (records.Count > 0)
