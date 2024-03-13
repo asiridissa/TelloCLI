@@ -48,11 +48,16 @@
             btnCorrect = new Button();
             label6 = new Label();
             groupBox1 = new GroupBox();
+            btnIncorrect1 = new Button();
             cmbAccuracyNote = new ComboBox();
             groupBox2 = new GroupBox();
             cmbCommand = new ComboBox();
             cmbCondition = new ComboBox();
             label7 = new Label();
+            btnIncorrect2 = new Button();
+            btnIncorrect3 = new Button();
+            btnIncorrect4 = new Button();
+            btnIncorrect5 = new Button();
             groupBox1.SuspendLayout();
             groupBox2.SuspendLayout();
             SuspendLayout();
@@ -256,16 +261,32 @@
             // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(btnIncorrect5);
+            groupBox1.Controls.Add(btnIncorrect4);
+            groupBox1.Controls.Add(btnIncorrect3);
+            groupBox1.Controls.Add(btnIncorrect2);
+            groupBox1.Controls.Add(btnIncorrect1);
             groupBox1.Controls.Add(cmbAccuracyNote);
             groupBox1.Controls.Add(btnIncorrect);
             groupBox1.Controls.Add(label6);
             groupBox1.Controls.Add(btnCorrect);
             groupBox1.Location = new Point(862, 20);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(262, 135);
+            groupBox1.Size = new Size(262, 343);
             groupBox1.TabIndex = 47;
             groupBox1.TabStop = false;
             groupBox1.Text = "Accuracy";
+            // 
+            // btnIncorrect1
+            // 
+            btnIncorrect1.BackColor = Color.FromArgb(255, 192, 192);
+            btnIncorrect1.Location = new Point(6, 133);
+            btnIncorrect1.Name = "btnIncorrect1";
+            btnIncorrect1.Size = new Size(250, 37);
+            btnIncorrect1.TabIndex = 48;
+            btnIncorrect1.Text = "Speech to text no result";
+            btnIncorrect1.UseVisualStyleBackColor = false;
+            btnIncorrect1.Click += btnIncorrectQuick_Click;
             // 
             // cmbAccuracyNote
             // 
@@ -289,7 +310,7 @@
             groupBox2.Controls.Add(label1);
             groupBox2.Controls.Add(chkRecordStart);
             groupBox2.Controls.Add(label2);
-            groupBox2.Location = new Point(862, 170);
+            groupBox2.Location = new Point(862, 398);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(262, 269);
             groupBox2.TabIndex = 48;
@@ -325,11 +346,56 @@
             label7.TabIndex = 41;
             label7.Text = "Control Condition";
             // 
+            // btnIncorrect2
+            // 
+            btnIncorrect2.BackColor = Color.FromArgb(255, 192, 192);
+            btnIncorrect2.Location = new Point(6, 175);
+            btnIncorrect2.Name = "btnIncorrect2";
+            btnIncorrect2.Size = new Size(250, 37);
+            btnIncorrect2.TabIndex = 49;
+            btnIncorrect2.Text = "Speech to text partial  result";
+            btnIncorrect2.UseVisualStyleBackColor = false;
+            btnIncorrect2.Click += btnIncorrectQuick_Click;
+            // 
+            // btnIncorrect3
+            // 
+            btnIncorrect3.BackColor = Color.FromArgb(255, 192, 192);
+            btnIncorrect3.Location = new Point(6, 216);
+            btnIncorrect3.Name = "btnIncorrect3";
+            btnIncorrect3.Size = new Size(250, 37);
+            btnIncorrect3.TabIndex = 50;
+            btnIncorrect3.Text = "Speech to text previous voice input partially used";
+            btnIncorrect3.UseCompatibleTextRendering = true;
+            btnIncorrect3.UseVisualStyleBackColor = false;
+            btnIncorrect3.Click += btnIncorrectQuick_Click;
+            // 
+            // btnIncorrect4
+            // 
+            btnIncorrect4.BackColor = Color.FromArgb(255, 192, 192);
+            btnIncorrect4.Location = new Point(6, 257);
+            btnIncorrect4.Name = "btnIncorrect4";
+            btnIncorrect4.Size = new Size(250, 37);
+            btnIncorrect4.TabIndex = 51;
+            btnIncorrect4.Text = "Speech to text invalid result";
+            btnIncorrect4.UseVisualStyleBackColor = false;
+            btnIncorrect4.Click += btnIncorrectQuick_Click;
+            // 
+            // btnIncorrect5
+            // 
+            btnIncorrect5.BackColor = Color.FromArgb(255, 192, 192);
+            btnIncorrect5.Location = new Point(6, 297);
+            btnIncorrect5.Name = "btnIncorrect5";
+            btnIncorrect5.Size = new Size(250, 37);
+            btnIncorrect5.TabIndex = 53;
+            btnIncorrect5.Text = "Drone behaviour mismatch the command";
+            btnIncorrect5.UseVisualStyleBackColor = false;
+            btnIncorrect5.Click += btnIncorrectQuick_Click;
+            // 
             // Voice
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1144, 497);
+            ClientSize = new Size(1144, 679);
             Controls.Add(groupBox2);
             Controls.Add(groupBox1);
             Controls.Add(btnEmergency);
@@ -379,5 +445,10 @@
         private ComboBox cmbCondition;
         private ComboBox cmbCommand;
         private ComboBox cmbAccuracyNote;
+        private Button btnIncorrect1;
+        private Button btnIncorrect5;
+        private Button btnIncorrect4;
+        private Button btnIncorrect3;
+        private Button btnIncorrect2;
     }
 }

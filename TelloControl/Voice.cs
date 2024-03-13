@@ -24,6 +24,7 @@ namespace TelloControl
         int commandPort = 8889; // Command port
         int telemetryPort = 8890; // Telemetry data port
         private static UdpClient commandClient = new UdpClient();
+
         public Voice()
         {
             InitializeComponent();
@@ -63,7 +64,8 @@ namespace TelloControl
             {
                 Encoding = RecognitionConfig.Types.AudioEncoding.Linear16,
                 SampleRateHertz = 16000,
-                LanguageCode = languageCode
+                LanguageCode = languageCode,
+
             };
 
             var streamingConfig = new StreamingRecognitionConfig
@@ -170,7 +172,7 @@ namespace TelloControl
             }
 
             stopwatch.Stop();
-            AppendConsole("All commands executed.");
+            AppendConsole("Command executed.\nSpeak now...");
         }
 
         private void btnTelemetry_Click(object sender, EventArgs e)
@@ -342,6 +344,11 @@ namespace TelloControl
         private void btnCorrect_Click(object sender, EventArgs e)
         {
             Log(countersFilePath, $"Correct,");
+        }
+
+        private void btnIncorrectQuick_Click(object sender, EventArgs e)
+        {
+            Log(countersFilePath, $"Incorrect,{((Button)sender).Text}");
         }
     }
 }
